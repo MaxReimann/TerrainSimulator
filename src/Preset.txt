@@ -1,0 +1,18 @@
+#Terrain Generator Preset File
+#Perlin
+Persistence: 43
+Zoom: 40
+Octaves: 7
+Fac:6
+
+#Voronoi
+BlockSize:66
+Intesity:3
+Coefficients:-0.6;0.5;0.2
+Distance: 1
+Clip:0.0
+Negative:0
+Fac:4
+
+#None
+Fac:4
