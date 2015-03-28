@@ -2,6 +2,7 @@
 #define GLOBALS_H
 #include "imports.h"
 #include "main.h"
+#include "3DWindow.h"
 
 
 

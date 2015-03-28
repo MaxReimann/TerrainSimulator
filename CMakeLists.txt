@@ -123,7 +123,8 @@ src/main.h
 src/main1.cpp
 src/mathlib.cpp
 src/mathlib.h
-src/OpenGL_processing.cpp
+src/3DWindow.cpp
+src/3DWindow.h
 src/PerlinNoise.cpp
 src/Perturbation.cpp
 src/Perturbation.h

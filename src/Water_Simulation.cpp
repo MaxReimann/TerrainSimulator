@@ -439,7 +439,7 @@ void Water_Simulation::Sim_Loop()
 
 		if ( frame->water_preview_on)   { visualize_Water2D(); }
 		if ( frame->sediment_preview_on){ visualize_Sediment2D(); }
-		frame->ManualRender();
+		frame->manualRender();
 
 		
 	}
@@ -587,7 +587,7 @@ void Water_Simulation::Water_Sim2()
 		{
 			if ( frame->water_preview_on)   { visualize_Water2D(); }
 			if ( frame->sediment_preview_on) { visualize_Sediment2D(); }
-			frame->ManualRender();
+			frame->manualRender();
 		}
 		
 		progress += 100.0/double(iterations); //(die endzahl muss 100 sein
@@ -783,7 +783,7 @@ void Water_Simulation::Water_Sim3()
 		{
 			if ( frame->water_preview_on)   { visualize_Water2D(); }
 			if ( frame->sediment_preview_on) { visualize_Sediment2D(); }
-			frame->ManualRender();
+			frame->manualRender();
 		}
 		
 		progress += 100.0/double(iterations); //(die endzahl muss 100 sein
@@ -1030,7 +1030,7 @@ for (int iter = 0; iter < iterations; iter++) {
 		{
 			if ( frame->water_preview_on)   { visualize_Water2D(); }
 			if ( frame->sediment_preview_on) { visualize_Sediment2D(); }
-			frame->ManualRender();
+			frame->manualRender();
 		}
 }
 dialog->Destroy();

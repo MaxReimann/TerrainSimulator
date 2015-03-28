@@ -4,24 +4,14 @@
 	#define _CRTDBG_MAP_ALLOC
 #endif
 
-
-
-
 #include "imports.h"
 #include "simulation.h"
 #include "DC_Panelclass.h"
 
 
 
-wxGauge* get_gauge(void);
 
-struct TerrainRegion
-	{
-		float min;
-		float max;
-		GLuint texture;
-		std::string filename;
-	};
+wxGauge* get_gauge(void);
 
 struct WaterConstants
 {
@@ -42,13 +32,6 @@ struct WaterConstants
 };
 
 
-  struct Vertex
-    {
-        float x, y, z;
-        float nx, ny, nz;
-        float s, t;
-		double d;
-    };
 
   struct WaterVertex
   {
@@ -75,88 +58,86 @@ class BasicFrame : public wxFrame {
                int width, int height);
    ~BasicFrame();
    void Onthebutton(wxCommandEvent &event);
-   void Subdivide_Button(wxCommandEvent &event);
-   void Open_image_button(wxCommandEvent &event);
-   void Erosion_Button(wxCommandEvent &event);
-   void Thermal_Erosion_Button(wxCommandEvent &event);
-   void Randomize_Button(wxCommandEvent &event);
-   void Plateau_Button(wxCommandEvent &event);
-   void PositionFlagButton(wxCommandEvent &event);
-   void Open_obj_button(wxCommandEvent &event);
-   void Save_obj(wxCommandEvent &event);
-   void Save_image(wxCommandEvent &event);
-   void Open_close_pic(wxCommandEvent &event);
-   void Scale_Terrain_Real_Button(wxCommandEvent &event);
-   void Simulate_Water(wxCommandEvent &event);
-   void Perlin_Noise(wxCommandEvent &event);
-   void Button_Voronoi(wxCommandEvent &event);
-   void Combined_Generate(wxCommandEvent &event);
-   void Button_Save_Preset(wxCommandEvent &event);
-   void Button_Load_Preset(wxCommandEvent &event);
-   void Perturbation_Button(wxCommandEvent &event);
+   void subdivideButtonEvent(wxCommandEvent &event);
+   void openImageButtonEvent(wxCommandEvent &event);
+   void erosionButtonEvent(wxCommandEvent &event);
+   void thermalErosionButtonEvent(wxCommandEvent &event);
+   void randomizeButtonEvent(wxCommandEvent &event);
+   void plateauButtonEvent(wxCommandEvent &event);
+   void positionFlagButtonEvent(wxCommandEvent &event);
+   void openObjButtonEvent(wxCommandEvent &event);
+   void saveObjEvent(wxCommandEvent &event);
+   void saveImageEvent(wxCommandEvent &event);
+   void openClosePicEvent(wxCommandEvent &event);
+   void scaleTerrainRealButtonEvent(wxCommandEvent &event);
+   void simulateWaterEvent(wxCommandEvent &event);
+   void perlinNoiseEvent(wxCommandEvent &event);
+   void buttonVoronoiEvent(wxCommandEvent &event);
+   void combinedGenerateEvent(wxCommandEvent &event);
+   void buttonSavePresetEvent(wxCommandEvent &event);
+   void buttonLoadPresetEvent(wxCommandEvent &event);
+   void perturbationButtonEvent(wxCommandEvent &event);
 
-   void Spinctrl1(wxSpinEvent &event);
-   void Spinctrl2(wxSpinEvent &event);
-   void Spinctrl3(wxSpinEvent &event);
-   void Choice_combined1(wxCommandEvent &event);
-   void Choice_combined2(wxCommandEvent &event);
-   void Choice_combined3(wxCommandEvent &event);
+   void spinctrl1Event(wxSpinEvent &event);
+   void spinctrl2Event(wxSpinEvent &event);
+   void spinctrl3Event(wxSpinEvent &event);
+   void choiceCombined1Event(wxCommandEvent &event);
+   void choiceCombined2Event(wxCommandEvent &event);
+   void choiceCombined3Event(wxCommandEvent &event);
 
-   void Slider_Erosion_iterationen(wxCommandEvent &event);
-   void Slider_Subdivision(wxCommandEvent &event);
-   void Slider_Erosion_radius(wxCommandEvent &event);
-   void Randomize_Slider(wxCommandEvent &event);
-   void Slider_Scale_Terrain(wxCommandEvent &event);
-   void Slider_Plateau_Radius(wxCommandEvent &event);
-   void Slider_Octaves(wxSpinEvent &event);
-   void Slider_Perlin_Zoom(wxCommandEvent &event);
-   void Slider_Persistence(wxCommandEvent &event);
+   void sliderErosionIterationenEvent(wxCommandEvent &event);
+   void sliderSubdivisionEvent(wxCommandEvent &event);
+   void sliderErosionRadiusEvent(wxCommandEvent &event);
+   void randomizeSliderEvent(wxCommandEvent &event);
+   void sliderScaleTerrainEvent(wxCommandEvent &event);
+   void sliderPlateauRadiusEvent(wxCommandEvent &event);
+   void sliderOctavesEvent(wxSpinEvent &event);
+   void sliderPerlinZoomEvent(wxCommandEvent &event);
+   void sliderPersistenceEvent(wxCommandEvent &event);
 
-   void Toggle_Watersource(wxCommandEvent &event);
-   void Toggle_Rain(wxCommandEvent &event);
-   void Toggle_Sediment_Preview(wxCommandEvent &event);
-   void Toggle_Water_Preview(wxCommandEvent &event);
-   void ToggleAuto(wxCommandEvent &event);
+   void toggleWatersourceEvent(wxCommandEvent &event);
+   void toggleRainEvent(wxCommandEvent &event);
+   void toggleSedimentPreviewEvent(wxCommandEvent &event);
+   void toggleWaterPreviewEvent(wxCommandEvent &event);
+   void toggleAutoEvent(wxCommandEvent &event);
 
-   void Slider_Rain_Amount(wxCommandEvent &event);
-   void Slider_Water_Radius(wxCommandEvent &event);
-   void Slider_Water_Amount(wxCommandEvent &event);
-   void Slider_Sediment_Capacity(wxCommandEvent &event);
-   void Slider_Deposition_Constant(wxCommandEvent &event);
-   void Slider_Dissolving_Constant(wxCommandEvent &event);
-   void Slider_Evaporation_Constant(wxCommandEvent &event);
-   void Slider_Timestep(wxCommandEvent &event);
-   void Slider_Minimum_Alpha(wxCommandEvent &event);
-   void Slider_Iterations(wxCommandEvent &event);
+   void sliderRainAmountEvent(wxCommandEvent &event);
+   void sliderWaterRadiusEvent(wxCommandEvent &event);
+   void sliderWaterAmountEvent(wxCommandEvent &event);
+   void sliderSedimentCapacityEvent(wxCommandEvent &event);
+   void sliderDepositionConstantEvent(wxCommandEvent &event);
+   void sliderDissolvingConstantEvent(wxCommandEvent &event);
+   void sliderEvaporationConstantEvent(wxCommandEvent &event);
+   void sliderTimestepEvent(wxCommandEvent &event);
+   void sliderMinimumAlphaEvent(wxCommandEvent &event);
+   void sliderIterationsEvent(wxCommandEvent &event);
 	
-   void Voronoi(double inp_map[] = NULL);
-   bool Execute_Choice(int choice,double inp_map[]);
-   void Error_dialog(string text);
-   void Save_Preset_Text(string path);
-   string Get_Values(int choice);
-   void Load_Preset_Text(string path);
+   void voronoi(double inp_map[] = NULL);
+   bool executeChoice(int choice,double inp_map[]);
+   void errorDialog(string text);
+   void savePresetText(string path);
+   string getValues(int choice);
+   void loadPresetText(string path);
   
    template <class T>
-   string num_to_string(T input);
+   string numToString(T input);
 
    template <class T>
-   T string_to_num(string input,T wished_type);
+   T stringToNum(string input,T wished_type);
 
-   string Readline(ifstream& file,char buffer[]);
-   void Change_wxChoice(int choice,int num);
-   double Get_Talus_Threshold();
+   string readline(ifstream& file,char buffer[]);
+   void changeWxChoice(int choice,int num);
+   double getTalusThreshold();
 
-
-
-
-   void PaintEvent(wxPaintEvent & event);
-   void render_it(wxDC&  dc);
-   void UpdateImage(void);
-   void ManualRender();
-   void HandleSash_position(wxSplitterEvent &event);
-   void DrawPoint(wxMouseEvent &event);
-   void ToggleCrosshair(wxCommandEvent &event);
-   void UpdateChain(void);
+   void paintEvent(wxPaintEvent & event);
+   void render(wxDC&  dc);
+   void updateImage(void);
+   void manualRender();
+   void handleSashPosition(wxSplitterEvent &event);
+   void drawPoint(wxMouseEvent &event);
+   void toggleCrosshair(wxCommandEvent &event);
+   void updateChain(void);
+   void m_splitter3OnIdle(wxIdleEvent&);
    
 
    wxSplitterWindow* m_splitter3;
@@ -165,13 +146,9 @@ class BasicFrame : public wxFrame {
 
    wxPanel *panel;
    wxButton *button;
-   //wxPanel *Subdivide_panel;
    wxButton *Loadfromimage_but;
-   //wxPanel *glPanel;
    wxButton *but_subdivide;
    wxSlider *subdivide_coeff_slider;
-   //AltitudeMap Alti;
-
 
 
 	wxNotebook *m_notebook2;
@@ -281,7 +258,7 @@ class BasicFrame : public wxFrame {
 
 
 
-	wxPanel* Scale;
+	wxPanel* scale;
 	wxButton* m_scale_terrain_but;
 	wxStaticText* m_staticText_scale;
 	wxSlider* m_scale_terrain;
@@ -439,169 +416,38 @@ private :
 		TOGGLE_WATER_PREVIEW
 
 	};
-	double foldingCoeff; //der faltigketi coeff fuer subdivision
-	int Erosion_radius;
-	int Erosion_iterationen;
-	double Randomize_radius;
-	int Plateau_radius;
-	void m_splitter3OnIdle( wxIdleEvent& );
-	bool side_window;
-	bool crosshair;
-	double Perlin_Zoom;
-	double Perlin_Persistence;
-	bool toggle_talus_auto;
-	int Octaves;
-	int factor_combination1;
-	int factor_combination2;
-	int factor_combination3;
-	int Choice_combination1;
-	int Choice_combination2;
-	int Choice_combination3;
+	double foldingCoeff; 
+	int erosionRadius;
+	int erosionIterations;
+	double randomizeRadius;
+	int plateauRadius;
 
-	double *Copy_map1; //copy_maps fuer combined
-	double *Copy_map2;
-	double *Copy_map3; 
+	bool sideWindow;
+	bool crosshair;
+	double perlinZoom;
+	double perlinPersistence;
+	bool toggleTalusAuto;
+	int octaves;
+	int factorCombination1;
+	int factorCombination2;
+	int factorCombination3;
+	int choiceCombination1;
+	int choiceCombination2;
+	int choiceCombination3;
+
+	double *copyMap1;
+	double *copyMap2;
+	double *copyMap3; 
 };
 
 
-class HalloWeltApp : public wxApp {
+class BaseApp : public wxApp {
    public:
 	//BasicFrame *frame;
    virtual bool OnInit();
-   ~HalloWeltApp();
+   ~BaseApp();
    wxBoxSizer* sizer;
    
-};
-
-
-
-
-class BasicGLPane : public wxGLCanvas
-{
-private:
-	float alpha; 
-	float xpos, ypos, zpos, xrot, yrot, angle;
-	float xshift, yshift;
-	float lastx, lasty,shiftlastx,shiftlasty;
-	GLuint   g_nullTexture;
-	GLuint   g_terrainShader;
-	GLuint terrainDL; //die terrain liste im gpu
-	//GLuint terrainDL_id;
-	GLUquadric* cylinder;
-	GLUquadric* sphere;
-	std::fstream errorstream;
-
-	GLdouble* win_cox;
-	GLdouble* win_coy;
-	GLdouble* win_coz;
-	GLdouble* obj_cox;
-	GLdouble* obj_coy;
-	GLdouble* obj_coz;
-	
-	
-	//float hoehenmap[2500];
-	float g_lightDir[4];
-	float light_intesity[4];
-	float yellowAmbientDiffuse[4];
-
-
-
-    
-public:
-	BasicGLPane(wxFrame* parent, int* args);
-	~BasicGLPane();
-	void resized(wxSizeEvent& evt);
-	//static, damit es in der satic funktion 
-	// process mouse genutzt werden kann
-    static float zoom;
-	int getWidth();
-	int getHeight();
-    
-	void render(wxPaintEvent& evt);
-	void prepare3DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
-	void prepare2DViewport(int topleft_x, int topleft_y, int bottomrigth_x, int bottomrigth_y);
-
-	void camera(void);
-	void mouseMovement(int x, int y);
-	void mouseshift(int x, int y);
-	void zoom_func();
-	GLint  project(int x , int y ,int z );
-	GLint unproject(int winx , int winy ,int winz );
-    
-	// events
-	void mouseMoved(wxMouseEvent& event);
-	void mouseDown(wxMouseEvent& event);
-	void mouseWheelMoved(wxMouseEvent& event);
-	void mouseReleased(wxMouseEvent& event);
-	void rightClick(wxMouseEvent& event);
-	void mouseLeftWindow(wxMouseEvent& event);
-	void keyPressed(wxKeyEvent& event);
-	void keyReleased(wxKeyEvent& event);
-	void middleMouseDown(wxMouseEvent& event);
-	GLuint Maketerrain(void);
-	void refresh_terrain();
-	void defineflag(void);
-	void setFlag(int x, int y);
-	// static, damit glutmousefunc diese nutzen kann
-	// sonst gibts argumenten listen error
-	static void processMouse(int button, int state, int x, int y);
-	GLuint LinkShaders(GLuint vertShader, GLuint fragShader);
-	GLuint LoadShaderProgram(const char *pszFilename, std::string &infoLog);
-	GLuint LoadTexture(const char *pszFilename);
-	GLuint LoadTexture(const char *pszFilename, GLint magFilter, GLint minFilter,GLint wrapS, GLint wrapT);
-
-
-	void BindTexture(GLuint texture, GLuint unit);
-	GLuint CompileShader(GLenum type , char* pszSource , GLint length);
-	GLuint CreateNullTexture(int width, int height);
-	void create_textures();
-	void ReadTextFile(const char *pszFilename, std::string &buffer);
-	void initstruct(void);
-	void init_textures(void);
-	void Create_Ok_Dialog(std::string msg,std::string title);
-	void UpdateTerrainShaderParameters(void);
-	bool generateVertices(void);
-	bool generateIndices(void);
-	bool terrainCreate(void);
-	void terrainDraw(void);
-	void updateTerrain(void);
-	void CleanupShader(void);
-	void CleanupStructs(void);
-	void Start_WaterSimulation(int method);
-
-	
-	
-	bool use16BitIndices() const
-    { return m_totalVertices <= 65536; }
-
-	const GLubyte *BUFFER_OFFSET(size_t bytes)
-	{ return reinterpret_cast<const GLubyte *>(0) + bytes; }
-
-
-	wxMessageDialog *Yes_no_dialog;
-	wxMessageDialog *Ok_dialog;
-
-
-
-	struct TerrainRegion g_regions[4];	
-	GLuint m_vertexBuffer;
-    unsigned int m_indexBuffer;
-    int m_totalVertices;
-    int m_totalIndices;
-	bool Update;
-	double Terrain_height_scale_fac;
-	//wxBitmap* rotate_bmp;
-	Image* rotating_image;
-	bool rotating;
-	Drawable* rotate_icon;//spezielle klasse, um auf gl mit wxwidgets zu malen
-	Vertex *pVertices;
-	//std::vector<TerrainRegion> g_regions;
-
-
-
-	
-    
-	DECLARE_EVENT_TABLE()
 };
 
 class Water_Simulation
