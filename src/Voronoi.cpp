@@ -1,5 +1,5 @@
 //#include "simulation.h"
-#include "gl_object.h"
+#include "globals.h"
 #include "Voronoi.h"
 
 #ifdef _DEBUG

@@ -6,14 +6,14 @@
 #endif
 
 #include "imports.h"
-class Bitmap_Panel : public wxPanel
+class BitmapPanel : public wxPanel
 {
  
 
 public:
-	Bitmap_Panel(wxWindow* parent);
-	Bitmap_Panel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size, long style, const wxString& name);
-	~Bitmap_Panel();
+	BitmapPanel(wxWindow* parent);
+	BitmapPanel(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size, long style, const wxString& name);
+	~BitmapPanel();
 	wxBitmap* crosshair_bmp;
 	wxBitmap temp_preview_bitmap;
 	int x,y;

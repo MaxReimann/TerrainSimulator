@@ -5,16 +5,15 @@
 #endif
 
 
+
+
 #include "imports.h"
 #include "simulation.h"
 #include "DC_Panelclass.h"
 
 
 
-
 wxGauge* get_gauge(void);
-
-
 
 struct TerrainRegion
 	{
@@ -24,7 +23,7 @@ struct TerrainRegion
 		std::string filename;
 	};
 
-struct Water_Constants
+struct WaterConstants
 {
 	float KC;
 	float KD;
@@ -48,19 +47,10 @@ struct Water_Constants
         float x, y, z;
         float nx, ny, nz;
         float s, t;
-		//double Waterdistribution;
 		double d;
-		//float sediment_amount;
-		/*double d1;
-		double d2;
-		double fluxLeft, fluxRight, fluxBottom, fluxTop;
-		double Volume;
-		double Vx, Vy;*/
-		
-		//double sediment_amount1;
     };
 
-  struct Water_Vertex
+  struct WaterVertex
   {
 	  double z;
 	  	double Waterdistribution;
@@ -72,7 +62,7 @@ struct Water_Constants
 		double Vx, Vy;
 		double sediment_amount;
 		double sediment_amount1;
-		double w; // w= d, nur wegen zwei versch simulationen
+		double w; // w= d
   };
 
 
@@ -298,59 +288,59 @@ class BasicFrame : public wxFrame {
 	wxStaticText* slider_labels;
 
 	//water_sim buttons
-		wxPanel* Water_sim_panel;
-		wxRadioBox* m_radioBox1_water_methods;
-		wxNotebook* m_notebook21;
-		wxPanel* water_pan_1;
-		wxButton* Simulate_button;
-		wxStaticLine* m_staticline3;
-		wxStaticText* m_staticText17;
-		wxToggleButton* m_togglerain;
+	wxPanel* Water_sim_panel;
+	wxRadioBox* m_radioBox1_water_methods;
+	wxNotebook* m_notebook21;
+	wxPanel* water_pan_1;
+	wxButton* Simulate_button;
+	wxStaticLine* m_staticline3;
+	wxStaticText* m_staticText17;
+	wxToggleButton* m_togglerain;
 		
-		wxSlider* m_slider12;
-		wxStaticLine* m_staticline21;
-		wxStaticText* m_staticText18;
-		wxStaticText* m_staticText20;
-		wxToggleButton* m_toggleBtn2;
-		wxSlider* m_slider13;
-		wxSlider* m_slider14;
-		wxPanel* pan_coefficients;
-		wxStaticText* m_staticText10;
-		wxSlider* m_slider8_KC;
-		wxStaticText* m_staticText12;
-		wxStaticText* m_staticText11;
-		wxSlider* m_slider9;
-		wxStaticText* m_staticText15;
-		wxStaticText* m_staticText13;
-		wxSlider* m_slider10;
-		wxStaticText* m_staticText16;
-		wxStaticText* m_staticText14;
-		wxSlider* m_slider11;
-		wxPanel* m_panel13;
-		wxStaticText* m_staticText28;
+	wxSlider* m_slider12;
+	wxStaticLine* m_staticline21;
+	wxStaticText* m_staticText18;
+	wxStaticText* m_staticText20;
+	wxToggleButton* m_toggleBtn2;
+	wxSlider* m_slider13;
+	wxSlider* m_slider14;
+	wxPanel* pan_coefficients;
+	wxStaticText* m_staticText10;
+	wxSlider* m_slider8_KC;
+	wxStaticText* m_staticText12;
+	wxStaticText* m_staticText11;
+	wxSlider* m_slider9;
+	wxStaticText* m_staticText15;
+	wxStaticText* m_staticText13;
+	wxSlider* m_slider10;
+	wxStaticText* m_staticText16;
+	wxStaticText* m_staticText14;
+	wxSlider* m_slider11;
+	wxPanel* m_panel13;
+	wxStaticText* m_staticText28;
 		
-		wxStaticText* m_staticText27;
-		wxStaticText* m_staticText26;
-		wxSlider* m_slider20;
+	wxStaticText* m_staticText27;
+	wxStaticText* m_staticText26;
+	wxSlider* m_slider20;
 		
-		wxStaticText* m_staticText261;
-		wxSlider* m_slider18;
+	wxStaticText* m_staticText261;
+	wxSlider* m_slider18;
 		
-		wxStaticText* m_staticText32;
+	wxStaticText* m_staticText32;
 		
-		wxStaticText* m_staticText33;
-		wxStaticText* m_staticText30;
-		wxSlider* m_slider22;
-		wxStaticText* m_staticText31;
-		wxSlider* m_slider21;
-		wxPanel* m_panel131;
-		wxToggleButton* m_toggleBtn3;
-		wxToggleButton* m_toggleBtn4;
+	wxStaticText* m_staticText33;
+	wxStaticText* m_staticText30;
+	wxSlider* m_slider22;
+	wxStaticText* m_staticText31;
+	wxSlider* m_slider21;
+	wxPanel* m_panel131;
+	wxToggleButton* m_toggleBtn3;
+	wxToggleButton* m_toggleBtn4;
 
 	//wxPanel* load_obj_panel;
 	wxButton* load_obj;
 
-	Bitmap_Panel* panel_preview_picture;
+	BitmapPanel* panel_preview_picture;
 	wxBitmapButton* open_close_pic_but;
 	wxStaticBitmap* m_bitmap2;
 	wxBitmap* crosshair_bmp;
@@ -379,11 +369,7 @@ class BasicFrame : public wxFrame {
    bool water_preview_on;
 
    
-
-   
-   
-   
-   DECLARE_EVENT_TABLE()
+DECLARE_EVENT_TABLE()
 private :
 	enum {
 		BUTTON_SUBDIVIDE,
@@ -413,8 +399,6 @@ private :
 		COMBINED_GENERATE,
 		BUTTON_PERTURB,
 		
-
-
 
 		BUTTON_EROSION,
 		BUTTON_THERMAL_EROSION,
@@ -455,7 +439,7 @@ private :
 		TOGGLE_WATER_PREVIEW
 
 	};
-	double Coeff; //der faltigketi coeff fuer subdivision
+	double foldingCoeff; //der faltigketi coeff fuer subdivision
 	int Erosion_radius;
 	int Erosion_iterationen;
 	double Randomize_radius;
@@ -476,12 +460,7 @@ private :
 
 	double *Copy_map1; //copy_maps fuer combined
 	double *Copy_map2;
-	double *Copy_map3;
-
-
-
-
-   
+	double *Copy_map3; 
 };
 
 
@@ -500,8 +479,7 @@ class HalloWeltApp : public wxApp {
 class BasicGLPane : public wxGLCanvas
 {
 private:
-	float alpha; // test zur rotaton
-	//angle of rotation
+	float alpha; 
 	float xpos, ypos, zpos, xrot, yrot, angle;
 	float xshift, yshift;
 	float lastx, lasty,shiftlastx,shiftlasty;
@@ -512,7 +490,7 @@ private:
 	GLUquadric* cylinder;
 	GLUquadric* sphere;
 	std::fstream errorstream;
-	//fuer gluproject und n
+
 	GLdouble* win_cox;
 	GLdouble* win_coy;
 	GLdouble* win_coz;
@@ -629,7 +607,7 @@ public:
 class Water_Simulation
 {
 public:
-Water_Simulation(const struct Water_Constants *constants,int _method);
+Water_Simulation(const struct WaterConstants *constants,int _method);
 ~Water_Simulation();
 void Distribution(double Water_Amount);
 void Rain_Distribution();
@@ -656,7 +634,7 @@ void Water_Sim4();
 void Progressbar();
 
 private:
-	Water_Vertex *vert_array;
+	WaterVertex *vert_array;
 	
 	std::fstream errorstream;
 	double A; //Querschnittflaeche einer pipe
@@ -684,10 +662,6 @@ private:
 
 
 };
-
-
-//BasicFrame *p_objekt;
-
 
 #endif
   

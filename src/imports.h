@@ -1,21 +1,19 @@
 #ifndef IMPORTS_H
 #define IMPORTS_H
-/* Alle benoetigten imports, damits man nicht alle s 3mal importieren muss*/
-
 
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <sstream> //stringstream
+#include <sstream> 
 #include <stdlib.h>
 #include <math.h>
 #include <windows.h>
 #include <cstddef>
 #include <time.h>
-//#include <stdafx.h>
+
 
 #include <list>
-#include <utility> //fuer pair
+#include <utility>
 #include <vector>
 #include <algorithm>
 #include <cmath>
@@ -28,6 +26,10 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
+
+
+#include "Drawable.h"
+#include "Image.h"
 
 
 #include "wx/wx.h"
@@ -58,14 +60,11 @@
 #include <wx/mstream.h>
 #include "wx/progdlg.h"
 
-#include "Drawable.h"
-#include "Image.h"
 
 
 #ifdef _DEBUG
 #include <crtdbg.h>
-//Bei der Debug Version werden news direkt in das File allokiert-> mann kann memory leaks finden
-//dieses Vorgehen ist speziell auf die Verwendung mit wxwidgets ausgerichtet
+// include information in allocation, useful for finding memory leaks
 #define DEBUG_NEW new(_NORMAL_BLOCK ,__FILE__, __LINE__) 
 #else
 #define DEBUG_NEW new

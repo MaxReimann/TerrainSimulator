@@ -1,4 +1,4 @@
-#include "Drawable.h"
+#include "drawable.h"
 #include <iostream>
  
 #ifdef __WXMAC__

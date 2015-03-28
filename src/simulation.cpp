@@ -310,7 +310,7 @@ void AltitudeMap::randomize(double r) {
 	init_random(); //bei jedem start eine andere seed nutzen
 	bool show_dialog = false;
 	if (xsize * ysize * r > 5000) { //nur progressbar erschaffen, wenn werte hoch genug
-		Progressbar();
+		showProgressbar();
 		show_dialog = true;
 		f = 0;} 
 
@@ -399,7 +399,7 @@ void AltitudeMap::erosion(int r,int iter){
 	double f;
 	double sum = 0.0;
 	if (xsize * ysize * iter * r > 5000) { //nur progressbar erschaffen, wenn werte hoch genug
-		Progressbar();
+		showProgressbar();
 		show_dialog = true;
 		f = 0;} 
 
@@ -481,7 +481,7 @@ void AltitudeMap::plateau( int x, int y ,int r ){
 	double f;
 	bool show_dialog = false;
 	if (r * r > 5000) { //nur progressbar erschaffen, wenn werte hoch genug
-		Progressbar();
+		showProgressbar();
 		show_dialog = true;
 		f = 0;} 
 	if (r >= xsize) {r=  xsize - 1; }
@@ -765,12 +765,12 @@ int AltitudeMap::terrainLoadFromImage(char *filename, int normals, int ungebrauc
 }
 
 
-void AltitudeMap::Progressbar(void){
+void AltitudeMap::showProgressbar(void){
 	dialog = new wxProgressDialog(wxT("Fortschritt der Operation"),
 		wxT("Fortschritt der Operation"),100,NULL, wxPD_AUTO_HIDE );
 }
 
-void AltitudeMap::Progressbar(wxString Text){
+void AltitudeMap::showProgressbar(wxString Text){
 	dialog = new wxProgressDialog(Text,
 		Text,100,NULL, wxPD_AUTO_HIDE );
 }
@@ -890,7 +890,7 @@ void AltitudeMap::ThermalErosion(int iter, double Talus)
 	float c = 0.5; //konstante mit relativ guten auswirkungen
 	float T = Talus;///*T = Talus angle*/
 	int duration = iter; // test
-	Progressbar();
+	showProgressbar();
 	float progress;
 
 

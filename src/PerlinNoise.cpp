@@ -5,7 +5,7 @@
 //					                     hash[ &(&(hash[&z<=255] + y)<=255)+x)<=255]
 
 
-#include "gl_object.h"
+#include "globals.h"
 #include "simulation.h"
 
 #ifdef _DEBUG
@@ -349,7 +349,7 @@ unsigned char hash[512]= {
 
 
 void AltitudeMap::Perlin(double Persistence,int Octaves, double zoom){
-	Progressbar(wxString("Perlin noise"));
+	showProgressbar(wxString("Perlin noise"));
 	persistence = Persistence;
 	octaves = Octaves;
 	rand = int(random(1,30));
@@ -374,7 +374,7 @@ void AltitudeMap::Perlin(double Persistence,int Octaves, double zoom){
 void AltitudeMap::Inp_Perlin(double inp_map[],double Persistence,int Octaves, double zoom ){
 	/*Perlin fuer eine Map die gegeben wird*/
 	
-	Progressbar(wxString("Perlin noise"));
+	showProgressbar(wxString("Perlin noise"));
 	persistence = Persistence;
 	octaves = Octaves;
 	rand = int(random(1,30));

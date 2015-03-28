@@ -1,7 +1,7 @@
 #include "imports.h"
 #include <valarray>
 #include "main.h"
-#include "gl_object.h"
+#include "globals.h"
 
 
 #ifdef _DEBUG
@@ -9,13 +9,14 @@
 #endif
 
 
-//#define DT 0.01f //Der Timestep, muss wahrscheinlich erhoeht werden
+//#define DT 0.01f //Timestep
 #define GRAVITY 9.81f
 
-//#define WATER_AMOUNT 5000.0f //kp in was der wert dargestellt ist
-//#define RADIUS 100.0f //Radius der wasserquelle
-//#define PIPE_LENGTH 1.0f //lenge der pipe
-#define AREA 1.0f //QuerschnittsFläche A einer Pipe
+//#define WATER_AMOUNT 5000.0f 
+//#define RADIUS 100.0f //Radius of water source
+//#define PIPE_LENGTH 1.0f
+
+#define AREA 1.0f //Square area of pipe
 //
 //#define KC 0.001f //sediment capacity constant 
 //#define KD 0.05f //deposition constant 
@@ -28,11 +29,11 @@
 
 using namespace std;
 
-Water_Simulation::Water_Simulation(const struct Water_Constants *constants,int _method)
+Water_Simulation::Water_Simulation(const struct WaterConstants *constants,int _method)
 {
 	ysize = Alti.getysize();
 	xsize = Alti.getxsize();
-	vert_array = new Water_Vertex [xsize * ysize];
+	vert_array = new WaterVertex [xsize * ysize];
 
 	errorstream.open("error_sim_water.txt",ios::out);
 	

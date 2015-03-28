@@ -32,14 +32,14 @@ bool AltitudeMap::save_image(char path[],string format){
 	if (format.compare(".png") == 0) {
 			image.SetOption(wxT("wxIMAGE_OPTION_PNG_FORMAT"),wxT("wxPNG_TYPE_COLOUR"));
 			image.SetOption(wxT("wxIMAGE_OPTION_PNG_BITDEPTH"),8);
-			image.SaveFile(wxT(path),wxBITMAP_TYPE_PNG);
+			image.SaveFile(wxString(path),wxBITMAP_TYPE_PNG);
 		}
 	else if (format.compare(".jpg") == 0){
 			image.SetOption(wxT("quality"),100);
-			image.SaveFile(wxT(path),wxBITMAP_TYPE_JPEG);
+			image.SaveFile(wxString(path), wxBITMAP_TYPE_JPEG);
 		}
 	if (format.compare(".bmp") == 0) {
-			image.SaveFile(wxT(path),wxBITMAP_TYPE_BMP);
+		image.SaveFile(wxString(path), wxBITMAP_TYPE_BMP);
 		}
 	bool t = image.IsOk();
 	image.Destroy();
@@ -108,13 +108,13 @@ bool AltitudeMap::load_image(char path[],int normals){
 	}
 	
 	if (format.compare(".png") == 0) {
-			image = wxImage(wxT(path),wxBITMAP_TYPE_PNG);
+		image = wxImage(wxString(path), wxBITMAP_TYPE_PNG);
 		}
 	else if (format.compare(".jpg") == 0){
-			image = wxImage(wxT(path),wxBITMAP_TYPE_JPEG);
+		image = wxImage(wxString(path), wxBITMAP_TYPE_JPEG);
 		}
 	else if (format.compare(".bmp") == 0) {
-			image = wxImage(wxT(path),wxBITMAP_TYPE_JPEG);
+		image = wxImage(wxString(path), wxBITMAP_TYPE_JPEG);
 		}
 	else {
 		return false;

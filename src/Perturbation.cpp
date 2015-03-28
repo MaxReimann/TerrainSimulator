@@ -1,5 +1,5 @@
 #include "Perturbation.h"
-#include "gl_object.h"
+#include "globals.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif

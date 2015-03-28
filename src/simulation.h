@@ -13,7 +13,7 @@
 
 #include "imports.h"
 #include "Perturbation.h"
-//#include "gl_object.h" //<-dummer fehler! 
+//#include "globals.h" //<-dummer fehler! 
 // darf hier auf keinen fall importiert werden, da sonst objekte erzeugt werden sollen,
 // deren deklaration (also folgende) noch nicht vollzogen ist
 using namespace std;
@@ -68,12 +68,12 @@ public:
 	bool load_image(char path[], int normals);
 	void error_output(void);
 	void randomize2(double r );
-	void Progressbar(void);
-	void Progressbar(wxString Text);
-	bool Load_obj(char  path []);
-	double split_text_doubles(std::string str,int& pos);
-	pair<double,double> find_range(vector<double> heightvec);
-	bool save_obj(char path[]);
+	void showProgressbar(void);
+	void showProgressbar(wxString Text);
+	bool loadOBJ(char  path []);
+	double parseValues(std::string str,int& pos);
+	pair<double,double> findRange(vector<double> heightvec);
+	bool saveOBJ(char path[]);
 	bool save_image(char path[],string format);
 	wxImage Make_Preview_Image(void);
 	wxImage Make_Sediment_Image(void);
