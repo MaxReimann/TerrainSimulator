@@ -17,8 +17,8 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include "mathlib.h"
-#include "random.h"
+#include "util/mathlib.h"
+#include "util/random.h"
 
 
 

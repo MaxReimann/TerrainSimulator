@@ -121,26 +121,28 @@ src/imports.h
 src/loadobj.cpp
 src/main.h
 src/main.cpp
-src/mathlib.cpp
-src/mathlib.h
 src/3dwindow.cpp
 src/3dwindow.h
 src/perlinnoise.cpp
 src/perturbation.cpp
 src/perturbation.h
-src/positionflag.rc
-src/Preset.txt
-src/random.h
-src/random.cpp
+src/primenumbers.h
+src/resources.rc
 src/simulation.cpp
 src/simulation.h
-src/tga.cpp
-src/tga.h
 src/toImage.cpp
 src/voronoi.cpp
 src/voronoi.h
 src/watersimulation.cpp
 src/watersimulation.h
+
+
+src/util/tga.cpp
+src/util/tga.h
+src/util/mathlib.cpp
+src/util/mathlib.h
+src/util/random.h
+src/util/random.cpp
 )
 
 

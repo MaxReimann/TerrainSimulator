@@ -1,5 +1,6 @@
 #include "simulation.h"
-#include "tga.h"
+#include "util/tga.h"
+#include "voronoi.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -406,12 +407,18 @@ void AltitudeMap::erosion(int r, int iter){
 	if (showDialog == true) { dialog->Destroy(); }
 }
 void AltitudeMap::normalize(){
+	normalize(map);
+}
+
+void AltitudeMap::normalize(double *inputMap){
+#define MAP(x,y) inputMap[(x)*ysize+(y)]
+	
 	for (int x = 0; x < xsize; ++x) {
 		for (int y = 0; y < ysize; ++y) {
-			if (ALT(x, y) < 0.0)
-				ALT(x, y) = 0.0;
-			else if (ALT(x, y) > 1.0) 
-				ALT(x, y) = 1.0;
+			if (MAP(x, y) < 0.0)
+				MAP(x, y) = 0.0;
+			else if (MAP(x, y) > 1.0)
+				MAP(x, y) = 1.0;
 		}
 	}
 }
@@ -826,3 +833,17 @@ void AltitudeMap::thermalErosion(int iter, double Talus)
 
 
 
+
+void AltitudeMap::voronoiTex(int fValue, int blockSize,
+	bool negative, float clip, int distance, float coefficients[], int elements)
+{
+	voronoiTex(fValue, blockSize, negative, clip, distance, map, coefficients, elements);
+}
+
+void AltitudeMap::voronoiTex(int fValue, int blockSize,
+	bool negative, float clip, int distance, double inputMap[], float coefficients[], int elements)
+{
+	Voronoi Vo = Voronoi(fValue, blockSize, NULL, 0, negative, clip);
+	Vo.calculate(inputMap, distance, coefficients, elements);
+	normalize(inputMap);
+}

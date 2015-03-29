@@ -9,22 +9,22 @@
 
 
 class Perturbation {
-	public:
-		float max_p; //maximale perturbation
-		double *noise_map_x;
-		double *noise_map_y;
-		double *copy_map;
-		int xsize;
-		int ysize;
-		wxProgressDialog* dialog;
+public:
+	float max_p; //max perturbation
+	double *noiseMapX;
+	double *noiseMapY;
+	double *copyMap;
+	int xsize;
+	int ysize;
+	wxProgressDialog* dialog;
 
 
-		Perturbation(float m);
-		void Apply(int Noise_method);
-		~Perturbation();
-		void Progressbar();
-		double cosin_interpolate(double a,double b,double x);
-		double GetWrap(int x, int y);
-		
+	Perturbation(float m);
+	void apply(int Noise_method);
+	~Perturbation();
+	void showProgressbar();
+	double cosin_interpolate(double a, double b, double x);
+	double getWrapped(int x, int y);
+
 };
 #endif
