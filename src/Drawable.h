@@ -1,7 +1,7 @@
 #ifndef _drawable_
 #define _drawable_
  
-#include "Image.h"
+#include "image.h"
  
 class Drawable
 {

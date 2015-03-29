@@ -6,47 +6,13 @@
 
 #include "imports.h"
 #include "simulation.h"
-#include "DC_Panelclass.h"
+#include "dcpanel.h"
 
 
 
 
 wxGauge* get_gauge(void);
 
-struct WaterConstants
-{
-	float KC;
-	float KD;
-	float KE;
-	float KS;
-	float KR;
-	float Pipe_length_x;
-	float Pipe_length_y;
-	float Radius;
-	float Water_Amount;
-	float DT;
-	float Min_alpha;
-	bool Rain_on;
-	bool Watersource_on;
-	int Iterations;
-};
-
-
-
-  struct WaterVertex
-  {
-	  double z;
-	  	double Waterdistribution;
-		double d;
-		double d1;
-		double d2;
-		double fluxLeft, fluxRight, fluxBottom, fluxTop;
-		double Volume;
-		double Vx, Vy;
-		double sediment_amount;
-		double sediment_amount1;
-		double w; // w= d
-  };
 
 
 
@@ -450,64 +416,6 @@ class BaseApp : public wxApp {
    
 };
 
-class Water_Simulation
-{
-public:
-Water_Simulation(const struct WaterConstants *constants,int _method);
-~Water_Simulation();
-void Distribution(double Water_Amount);
-void Rain_Distribution();
-void Increase_Water();
-void Sim_Loop();
-void Flux_Sim();
-void Surface_and_Velocity();
-void Erosion_Deposition();
-void Sediment_Transport();
-void Evaporation();
-void normalize_height();
-void visualize_Water2D();
-void visualize_Sediment2D();
-
-
-void Water_Sim2();
-double Average_a(int x,int y);
-double d_total(int x, int y);
-void Water_Sim3();
-
-void Water_Sim4();
-
-
-void Progressbar();
-
-private:
-	WaterVertex *vert_array;
-	
-	std::fstream errorstream;
-	double A; //Querschnittflaeche einer pipe
-	double l; //laenge einer Pipe
-	int ysize;
-	int xsize;
-	double dif_height_l, dif_height_r, dif_height_t, dif_height_b;//delta height: left right top bottom
-	double d_avg;
-	double Waterpass_x, Waterpass_y;
-	double inflow_sum, outflow_sum;
-	wxProgressDialog* dialog;
-	float RADIUS;
-	float KC, KD, KS, KE, KR;
-	float WATER_AMOUNT;
-	float PIPE_LENGTH;
-	float DT;
-	int Iterations;
-	wxImage temp_img;
-	int normalized;
-	bool Rain_on;
-	bool Water_source_on;
-	time_t seconds;
-	int method;
-
-
-
-};
 
 #endif
   

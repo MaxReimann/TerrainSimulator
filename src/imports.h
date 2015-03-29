@@ -28,8 +28,8 @@
 #include <GL/glut.h>
 
 
-#include "Drawable.h"
-#include "Image.h"
+#include "drawable.h"
+#include "image.h"
 
 
 #include "wx/wx.h"

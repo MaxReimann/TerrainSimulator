@@ -110,39 +110,37 @@ find_package(GLUT REQUIRED)
 
 set(sources
 
-src/DC_Panelclass.cpp
-src/DC_Panelclass.h
+src/dcpanel.cpp
+src/dcpanel.h
 src/drawable.cpp
 src/drawable.h
-src/gl_object.h
-src/Image.cpp
-src/Image.h
+src/globals.h
+src/image.cpp
+src/image.h
 src/imports.h
-src/load_obj.cpp
+src/loadobj.cpp
 src/main.h
-src/main1.cpp
+src/main.cpp
 src/mathlib.cpp
 src/mathlib.h
-src/3DWindow.cpp
-src/3DWindow.h
-src/PerlinNoise.cpp
-src/Perturbation.cpp
-src/Perturbation.h
+src/3dwindow.cpp
+src/3dwindow.h
+src/perlinnoise.cpp
+src/perturbation.cpp
+src/perturbation.h
 src/positionflag.rc
 src/Preset.txt
 src/random.h
-src/random_gen.cpp
+src/random.cpp
 src/simulation.cpp
 src/simulation.h
 src/tga.cpp
 src/tga.h
 src/toImage.cpp
-src/Voronoi.cpp
-src/Voronoi.h
-src/Water_Simulation.cpp
-src/wxImageLoader.cpp
-src/wxImageLoader.h
-
+src/voronoi.cpp
+src/voronoi.h
+src/watersimulation.cpp
+src/watersimulation.h
 )
 
 

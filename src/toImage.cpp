@@ -14,10 +14,6 @@
 
 bool AltitudeMap::save_image(char path[],string format){
 	
-	//Progressbar(); //AltitudeMap::Progressbar aufrufen
-	
-	//wxImage(int width, int height, bool clear=true)
-	
 	wxImage image = wxImage(xsize,ysize,true);
 	for (int x = 0; x < xsize; x++){
 		for (int y = 0; y < ysize;y++){

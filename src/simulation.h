@@ -12,7 +12,7 @@
 
 
 #include "imports.h"
-#include "Perturbation.h"
+#include "perturbation.h"
 //#include "globals.h" //<-dummer fehler! 
 // darf hier auf keinen fall importiert werden, da sonst objekte erzeugt werden sollen,
 // deren deklaration (also folgende) noch nicht vollzogen ist

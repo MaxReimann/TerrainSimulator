@@ -1,4 +1,4 @@
-#include "DC_Panelclass.h"
+#include "dcpanel.h"
 #include "..\resources\crosshair_png.cpp" //png bild in c vector
 #include "globals.h"
 
@@ -82,7 +82,7 @@ void BitmapPanel::render( void )
 	if ( frame->sediment_preview_on ){
 		dc.SetFont(dcfont);
 		dc.DrawText(wxT("Sediment amount:"),0,101 + Alti.getysize());
-		dc.DrawBitmap(global_sediment_bitmap,0,120 + Alti.getysize(),false);
+		dc.DrawBitmap(g_sedimentBitmap,0,120 + Alti.getysize(),false);
 	}
 	pic_width = global_preview_bitmap.GetWidth();
 	pic_height = global_preview_bitmap.GetHeight();

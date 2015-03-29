@@ -5,13 +5,15 @@
 #ifdef __WXMAC__
 #include "OpenGL/gl.h"
 #else
-#include <GL/glew.h> //gl und glu werden mimt glew import
+#include <GL/glew.h> 
 #include <GL/glu.h>
 #include <GL/gl.h>
 #endif
  
+ #include <cmath>
+ 
+#include "wx/image.h"
 #include "wx/wx.h"
-#include "wxImageLoader.h"
  
 class Image
 {
@@ -37,6 +39,8 @@ public:
     ~Image();
     void load(wxString path);
 	void load(wxImage img);
+	GLuint* loadImage(wxString path, int* imageWidth, int* imageHeight, int* textureWidth, int* textureHeight);
+	GLuint* loadImage(wxImage in_img, int* imageWidth, int* imageHeight, int* textureWidth, int* textureHeight);
         
 };
  

@@ -1,8 +1,8 @@
 #include "imports.h"
-#include "3DWindow.h"
+#include "globals.h"
+#include "3dwindow.h"
 #include "..\resources\rotate_icon_png.cpp"
 #include "main.h"
-#include "globals.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -447,7 +447,7 @@ void BasicGLPane::updateTerrain(void) {
 void BasicGLPane::startWaterSimulation(int method, WaterConstants *constants)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	Water_Simulation watersim = Water_Simulation(constants, method);
+	WaterSimulation watersim = WaterSimulation(constants, method);
 	glUnmapBuffer(GL_ARRAY_BUFFER);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -1006,5 +1006,3 @@ void BasicGLPane::cleanupStructs(){
         m_totalIndices = 0;
     }
 }
-
-d 

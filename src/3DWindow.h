@@ -4,8 +4,8 @@
 #endif
 
 #include "imports.h"
-#include "DC_Panelclass.h"
-#include "main.h"
+#include "dcpanel.h"
+#include "watersimulation.h"
 
 wxGauge* get_gauge(void);
 
