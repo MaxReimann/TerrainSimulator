@@ -20,20 +20,14 @@ build
 /_start-cmake-gui.bat
 /bin
 /lib
-/BendedViews
+
 
 CMakeLists.txt.user
 CMakeCache.txt
 /export
 
-
-/bullet
-/3rdParty
-!/data
-/data/*
-!/data/screenshots
-fmod.log
-
 *.orig
 
 settings.ini
+
+error_sim_water.txt
