@@ -282,10 +282,10 @@ public:
 	wxBitmap* crosshair_bmp;
 	wxBitmap* crosshair_bmp_deact;
 	wxBitmapButton* m_bitmap_button_setflag;
-	wxBitmap* Pfeil_RU;
-	wxBitmap* Pfeil_LO;
+	wxBitmap* arrowRB;
+	wxBitmap* arrowLT;
 	wxMask *Save_mask;
-	wxMask  *pfeil_mask;
+	wxMask  *arrowMask;
 	wxMask *Open_mask;
 
 	wxString clip_variable;
