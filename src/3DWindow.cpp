@@ -239,10 +239,10 @@ void BasicGLPane::mouseshift(int x, int y) {
 	m_yShift += diffY;
 }
 void BasicGLPane::setFlag(int x, int y) {
-	if (x >= 0 && x < Alti.getxsize())
+	if (x >= 0 && x < Alti.getXSize())
 		Alti.FlagX = x;
-	if (y >= 0 && y < Alti.getysize())
-		Alti.FlagY = Alti.getysize() - y;
+	if (y >= 0 && y < Alti.getYSize())
+		Alti.FlagY = Alti.getYSize() - y;
 	Refresh();
 }
 
@@ -263,27 +263,27 @@ GLuint BasicGLPane::makeTerrain(){
 	glNewList(m_terrainDL, GL_COMPILE);
 	glColor4f(0.8, 0.5, 0.5, 1);
 
-	for (double y = 0; y < Alti.getysize(); ++y){
+	for (double y = 0; y < Alti.getYSize(); ++y){
 		glBegin(GL_TRIANGLE_STRIP);
-		for (double x = 0; x < Alti.getxsize(); ++x) {
-			double color = 1.0 / (Alti.getaltitude(x, y) * m_terrainHeightScale  * 3.5); // coloring by height
+		for (double x = 0; x < Alti.getXSize(); ++x) {
+			double color = 1.0 / (Alti.getAltitude(x, y) * m_terrainHeightScale  * 3.5); // coloring by height
 			color = ((color) > 1.0) ? (1.0) : color;
 			
 			if (y == 0)
 			{
 				glColor4f(color, 0.7, 0.4, 1);
 				glTexCoord2f(0, 0);
-				glVertex3f(x * terrainStepWidth, y * terrainStepLength, -Alti.getaltitude(x, y) * m_terrainHeightScale);
+				glVertex3f(x * terrainStepWidth, y * terrainStepLength, -Alti.getAltitude(x, y) * m_terrainHeightScale);
 			}
 			else
 			{
 				glColor4f(color, 0.7, 0.4, 1);
 				glTexCoord2f(0, (int(x) % 2) ? 0 : 1);
-				glVertex3f(x * terrainStepWidth, y * terrainStepLength, -Alti.getaltitude(x, y - 1)  * m_terrainHeightScale);
+				glVertex3f(x * terrainStepWidth, y * terrainStepLength, -Alti.getAltitude(x, y - 1)  * m_terrainHeightScale);
 			}
 
 			glTexCoord2f((int(x) % 2) ? 0 : 1, 1);
-			glVertex3f(x * terrainStepWidth, (y + 1) * terrainStepLength, -Alti.getaltitude(x, y)  * m_terrainHeightScale);
+			glVertex3f(x * terrainStepWidth, (y + 1) * terrainStepLength, -Alti.getAltitude(x, y)  * m_terrainHeightScale);
 		}
 
 		glEnd();
@@ -301,7 +301,7 @@ void BasicGLPane::refreshTerrain() {
 }
 void BasicGLPane::defineFlag() {
 	glColor4f(0.8, 0.7, 1, 1);
-	glTranslatef(Alti.FlagX * 0.025, (Alti.FlagY)  * 0.025, Alti.getaltitude(Alti.FlagX, (Alti.FlagY))  * m_terrainHeightScale);
+	glTranslatef(Alti.FlagX * 0.025, (Alti.FlagY)  * 0.025, Alti.getAltitude(Alti.FlagX, (Alti.FlagY))  * m_terrainHeightScale);
 	m_cylinder = gluNewQuadric();
 	gluCylinder(m_cylinder, 0.05, 0.05, 0.5, 20, 20);
 }
@@ -710,22 +710,22 @@ void BasicGLPane::initStruct(void) {
 	g_regions[0].min = -10.0f;//alle werte 10 runter, da bei 0.0 nur schwarz (nichts) angezigt wird
 	g_regions[0].max = 50.0f * HEIGHTMAP_SCALE;
 	g_regions[0].texture = 0;
-	g_regions[0].filename = string( "other_resources/browndirt.jpg"); //wahlweise browndirt oder dirt
+	g_regions[0].filename = string( "resources/textures/browndirt.jpg"); //wahlweise browndirt oder dirt
 
 	g_regions[1].min =  41.0f * HEIGHTMAP_SCALE;
 	g_regions[1].max = 91.0f * HEIGHTMAP_SCALE;
 	g_regions[1].texture = 0;
-	g_regions[1].filename = string("other_resources/grass.jpg");
+	g_regions[1].filename = string("resources/textures/grass.jpg");
 
 	g_regions[2].min =  92.0f * HEIGHTMAP_SCALE;
 	g_regions[2].max = 193.0f * HEIGHTMAP_SCALE;
 	g_regions[2].texture = 0;
-	g_regions[2].filename = string("other_resources/rock.jpg");
+	g_regions[2].filename = string("resources/textures/rock.jpg");
 
 	g_regions[3].min =  194.0f * HEIGHTMAP_SCALE;
 	g_regions[3].max =  300.0f * HEIGHTMAP_SCALE;
 	g_regions[3].texture = 0;
-	g_regions[3].filename = string("other_resources/snow.jpg");
+	g_regions[3].filename = string("resources/textures/snow.jpg");
 
 
 }
@@ -787,7 +787,7 @@ bool BasicGLPane::generateVertices()
     //*pVertices = 0;
     Vertex *pVertex = 0;
     int currVertex = 0;
-    int size = Alti.getxsize();
+    int size = Alti.getXSize();
     int gridSpacing = 16;
     float heightScale = HEIGHTMAP_SCALE;
     Vector3 normal;
@@ -801,16 +801,16 @@ bool BasicGLPane::generateVertices()
         return false;
     }
 
-    for (int y = 0; y < Alti.getysize(); ++y)
+    for (int y = 0; y < Alti.getYSize(); ++y)
     {
-        for (int x = 0; x < Alti.getxsize(); ++x)
+        for (int x = 0; x < Alti.getXSize(); ++x)
         {
             currVertex = y * size + x;
             pVertex = &pVertices[currVertex];
 
             pVertex->x = static_cast<float>(x * 0.025);
 			pVertex->y = static_cast<float>(y * 0.025);
-            pVertex->z = Alti.getaltitude(x, y) * m_terrainHeightScale; 
+            pVertex->z = Alti.getAltitude(x, y) * m_terrainHeightScale; 
 			
 
             Alti.normalAtPoint(x, y, normal);
@@ -832,7 +832,7 @@ bool BasicGLPane::terrainCreate(void)
 {
     // Initialize the vertex buffer object.
 
-	m_totalVertices = Alti.getxsize() * Alti.getysize();
+	m_totalVertices = Alti.getXSize() * Alti.getYSize();
     glGenBuffers(1, &m_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * m_totalVertices,0, GL_DYNAMIC_DRAW);
@@ -840,7 +840,7 @@ bool BasicGLPane::terrainCreate(void)
 
     // Initialize the index buffer object.
 
-    m_totalIndices = (Alti.getxsize() - 1) * (Alti.getysize() * 2 + 1);
+    m_totalIndices = (Alti.getXSize() - 1) * (Alti.getYSize() * 2 + 1);
     glGenBuffers(1, &m_indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
     
@@ -855,7 +855,7 @@ bool BasicGLPane::terrainCreate(void)
 bool BasicGLPane::generateIndices()
 {
     void *pBuffer = 0;
-	int size = Alti.getxsize();
+	int size = Alti.getXSize();
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
     

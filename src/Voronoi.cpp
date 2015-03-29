@@ -17,8 +17,8 @@ Voronoi::Voronoi(int _fValue, int _blockSize,
 				 clip(_clip)
 {
 
-		xsize = Alti.getxsize();
-		ysize = Alti.getysize();
+		xsize = Alti.getXSize();
+		ysize = Alti.getYSize();
 		init_random();
 		f = 0.0; //progressbar progress length
 
@@ -304,7 +304,7 @@ void Voronoi::draw(){
 			if (XY.first < xsize && XY.second < ysize){
 				if (inp_map == NULL)
 				{
-					Alti.Alt(XY.first,XY.second,color);
+					Alti.writeAltitude(XY.first,XY.second,color);
 				}
 				else 
 				{

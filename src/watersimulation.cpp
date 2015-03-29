@@ -26,8 +26,8 @@ using namespace std;
 
 WaterSimulation::WaterSimulation(const struct WaterConstants *constants, int _method)
 {
-	ysize = Alti.getysize();
-	xsize = Alti.getxsize();
+	ysize = Alti.getYSize();
+	xsize = Alti.getXSize();
 	vert_array = new WaterVertex[xsize * ysize];
 
 	errorstream.open("error_sim_water.txt", ios::out);
@@ -56,7 +56,7 @@ WaterSimulation::WaterSimulation(const struct WaterConstants *constants, int _me
 		for (int y = 0; y < ysize; y++)
 		{
 
-			VEX(x, y).z = Alti.getaltitude(x, y);
+			VEX(x, y).z = Alti.getAltitude(x, y);
 			VEX(x, y).Waterdistribution = 0.0;
 			VEX(x, y).d = 0.0; // water is 0 everywhere
 			VEX(x, y).d1 = 0.0;
@@ -113,7 +113,7 @@ WaterSimulation::WaterSimulation(const struct WaterConstants *constants, int _me
 	for (int x = 0; x < xsize; x++){
 		for (int y = 0; y < ysize; y++)
 		{
-			Alti.Alt(x, y, VEX(x, y).z);
+			Alti.writeAltitude(x, y, VEX(x, y).z);
 			//Alti.sediment_map[(x)* ysize+(y)] = VEX(x,y).sediment_amount;
 		}
 	}
@@ -339,7 +339,7 @@ void  WaterSimulation::erosionDeposition()
 	for (int x = 1; x < xsize - 1; x++){
 		for (int y = 1; y < ysize - 1; y++){
 
-			alpha = max(0.01, max(abs(Alti.angle_slope_x(x, y)), abs(Alti.angle_slope_y(x, y))));
+			alpha = max(0.01, max(abs(Alti.angleSlopeX(x, y)), abs(Alti.angleSlopeY(x, y))));
 			velo = sqrt(VEX(x, y).Vx * VEX(x, y).Vx + VEX(x, y).Vy * VEX(x, y).Vy)/*betrag des velocity vektor*/;
 			C = KC /*sediment capacity*/ * sin(alpha) * velo;//* 
 
@@ -727,8 +727,8 @@ void WaterSimulation::fastSolver()
 
 void  WaterSimulation::hydraulicErosion()
 {
-	int xsize = Alti.getxsize();
-	int ysize = Alti.getysize();
+	int xsize = Alti.getXSize();
+	int ysize = Alti.getYSize();
 	int x;
 	int y;
 	int xNeighbours;

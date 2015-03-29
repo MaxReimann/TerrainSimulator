@@ -6,7 +6,7 @@
 #include <math.h>
 #include "wx/image.h"
 #define ALT(x,y) (map[(x)*ysize+(y)])
-#define SEDIMENT(x,y) (sediment_map[(x)*ysize+(y)])
+#define SEDIMENT(x,y) (sedimentMap[(x)*ysize+(y)])
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -45,10 +45,10 @@ bool AltitudeMap::save_image(char path[],string format){
 	//dialog->Update(30);
 }
 
-wxImage  AltitudeMap::Make_Preview_Image(void){
-	if (xsize != preview_image->GetWidth() || ysize != preview_image->GetHeight() ){ //wenn groesse geaendert wurde
-		preview_image->Destroy();
-		preview_image = new wxImage(xsize,ysize,true);
+wxImage  AltitudeMap::makePreviewImage(void){
+	if (xsize != previewImage->GetWidth() || ysize != previewImage->GetHeight() ){ //wenn groesse geaendert wurde
+		previewImage->Destroy();
+		previewImage = new wxImage(xsize,ysize,true);
 	}
 	for (int x = 0; x < xsize; x++){
 		for (int y = 0; y < ysize ;y++){
@@ -56,18 +56,18 @@ wxImage  AltitudeMap::Make_Preview_Image(void){
 			int value = static_cast<int>(ALT(x,y) * 255);
 			//dadurch,dass alle R,G,B gleich gross sind wird das
 			//Bild Greyscale
-			preview_image->SetRGB(x,y, value,value,value);
+			previewImage->SetRGB(x,y, value,value,value);
 			
 		}
 	}
 	//wxImage* preview_image_2 = new wxImage(); //vertikal spiegeln
-	return (preview_image->Mirror(false));
+	return (previewImage->Mirror(false));
 }
 
 wxImage  AltitudeMap::Make_Sediment_Image(void){
-	if (xsize != preview_image->GetWidth() || ysize != preview_image->GetHeight() ){ //wenn groesse geaendert wurde
-		preview_image->Destroy();
-		preview_image = new wxImage(xsize,ysize,true);
+	if (xsize != previewImage->GetWidth() || ysize != previewImage->GetHeight() ){ //wenn groesse geaendert wurde
+		previewImage->Destroy();
+		previewImage = new wxImage(xsize,ysize,true);
 	}
 	int normalized;
 	for (int x = 0; x < xsize; x++){
@@ -77,20 +77,20 @@ wxImage  AltitudeMap::Make_Sediment_Image(void){
 			normalized = int(1.0 / 2.0 * ( 1.0 - SEDIMENT(x,y) / (sqrt( SEDIMENT(x,y) * SEDIMENT(x,y) + 0.1)) * 255)); // 1/2 * (1-d/(sqrt(d² + a)) * 255 
 			}
 			else {
-				normalized = preview_image->GetBlue(x,y); //normales greysacle bild erzugen wenn werte zu klein
+				normalized = previewImage->GetBlue(x,y); //normales greysacle bild erzugen wenn werte zu klein
 			}
 			//int value = static_cast<int>(SEDIMENT(x,y) * 255);
 			//dadurch,dass alle R,G,B gleich gross sind wird das
-			preview_image->SetRGB(x,y, preview_image->GetGreen(x,y),(unsigned char) normalized,preview_image->GetRed(x,y));
+			previewImage->SetRGB(x,y, previewImage->GetGreen(x,y),(unsigned char) normalized,previewImage->GetRed(x,y));
 			
 		}
 	}
 	//wxImage* preview_image_2 = new wxImage(); //vertikal spiegeln
-	return (preview_image->Mirror(false));
+	return (previewImage->Mirror(false));
 }
 
 
-bool AltitudeMap::load_image(char path[],int normals){
+bool AltitudeMap::loadImage(char path[],int normals){
 	//Loader fuer alle formate ausser .tga
 	wxImage image;
 	//#### format extrahieren ### ///

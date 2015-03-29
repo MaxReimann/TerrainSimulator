@@ -7,8 +7,8 @@
 Perturbation::Perturbation(float m)
 {
 	max_p = m;
-	xsize = Alti.getxsize();
-	ysize = Alti.getysize();
+	xsize = Alti.getXSize();
+	ysize = Alti.getYSize();
 	noise_map_x = new double [xsize * ysize + 1];
 	noise_map_y = new double [xsize * ysize + 1];
 	copy_map = new double [xsize * ysize +1 ];
@@ -21,9 +21,9 @@ void Perturbation::Apply(int Noise_method)
 	
 	if (Noise_method == 0 )
 	{
-		Alti.Inp_subdivision(0.3,noise_map_x);
+		Alti.subdivision(0.3,noise_map_x);
 		dialog->Update(25);
-		Alti.Inp_subdivision(0.3,noise_map_y);
+		Alti.subdivision(0.3,noise_map_y);
 		dialog->Update(50);
 	}
 	else if (Noise_method == 1 )
@@ -82,7 +82,7 @@ void Perturbation::Apply(int Noise_method)
 	}
 	for (int x = 0; x < xsize;++x) {
 		for (int y = 0; y < ysize;++y) {
-			Alti.Alt(x,y,copy_map[x*ysize+y]);
+			Alti.writeAltitude(x,y,copy_map[x*ysize+y]);
 		}
 	}
 	dialog->Destroy();
@@ -126,11 +126,11 @@ double Perturbation::GetWrap(int x, int y)
 	*/
 	if (x < 0 || x >= xsize || y < 0 || y >= ysize) 
 	{
-		return (Alti.getaltitude((y + ysize) % ysize,(x + xsize) % xsize ));
+		return (Alti.getAltitude((y + ysize) % ysize,(x + xsize) % xsize ));
 	} 
 	else 
 	{
-		return (Alti.getaltitude(x,y));
+		return (Alti.getAltitude(x,y));
 	}
 }
 

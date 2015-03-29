@@ -54,8 +54,8 @@ wxPanel(parent,id,pos,size,style,name)
 	wxImage im_crosshair_png(istream, wxBITMAP_TYPE_PNG); 
 
 	crosshair_bmp = new wxBitmap(im_crosshair_png);
-	x = int(double(Alti.getxsize()) / 2.0);
-	y = int(double(Alti.getysize()) / 2.0) ;
+	x = int(double(Alti.getXSize()) / 2.0);
+	y = int(double(Alti.getYSize()) / 2.0) ;
 	flag_on = true;
 	flag_changed = false;
 	dcfont = wxFont(8,wxFONTFAMILY_DEFAULT,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_NORMAL);
@@ -81,8 +81,8 @@ void BitmapPanel::render( void )
 
 	if ( frame->sediment_preview_on ){
 		dc.SetFont(dcfont);
-		dc.DrawText(wxT("Sediment amount:"),0,101 + Alti.getysize());
-		dc.DrawBitmap(g_sedimentBitmap,0,120 + Alti.getysize(),false);
+		dc.DrawText(wxT("Sediment amount:"),0,101 + Alti.getYSize());
+		dc.DrawBitmap(g_sedimentBitmap,0,120 + Alti.getYSize(),false);
 	}
 	pic_width = global_preview_bitmap.GetWidth();
 	pic_height = global_preview_bitmap.GetHeight();

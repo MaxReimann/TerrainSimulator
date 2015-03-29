@@ -13,9 +13,8 @@
 
 #include "imports.h"
 #include "perturbation.h"
-//#include "globals.h" //<-dummer fehler! 
-// darf hier auf keinen fall importiert werden, da sonst objekte erzeugt werden sollen,
-// deren deklaration (also folgende) noch nicht vollzogen ist
+
+
 using namespace std;
 
 
@@ -25,12 +24,12 @@ using namespace std;
 
 class AltitudeMap {
 private:
-	wxImage *preview_image;
+	wxImage *previewImage;
 	double sealevel;
 	int xsize, ysize;
-	void subdiv_private(double coeff,int x1, int y1, int x2, int y2);
+	void _subdivide(double coeff, int x1, int y1, int x2, int y2, double* inputMap=nullptr);
 	//unsigned TT800(void);
-	void init_random(void);
+	void initRandom(void);
 	std::fstream errorstream;
 	double change ;
 	wxProgressDialog* dialog;
@@ -38,34 +37,33 @@ private:
 	double *terrainColors;
 public:
 	double *map;
-	double *sediment_map;
-	double ***DiffMap;
+	double *sedimentMap;
+	double ***diffMap;
 	AltitudeMap(int _xsize,int _ysize);
 	AltitudeMap();
 	~AltitudeMap(void);
-	void delete_diffMap();
-	double getaltitude(int x,int y);
-	void Alt(int x,int y, double z);
+	void deleteDiffMap();
+	double getAltitude(int x,int y);
+	void writeAltitude(int x,int y, double z);
 	void add(int x,int y, double z);
 	void multiply(int x,int y, double z);
-	double getsealevel(void);
-	void getsealevel(double sl);
-	int getysize(void);
-	int getxsize(void);
+	double getSeaLevel(void);
+	void getSeaLevel(double sl);
+	int getYSize(void);
+	int getXSize(void);
 	void subdivision(double coeff,double lt,double rt, double lb, double rb);
 	double random(double a, double b);
 	void randomize(double r);
 	void erosion(int r,int iter);
 	void plateau(int x,int y ,int r );
 	void normalize();
-	void normalize2();
-	double slope_x(int x, int y);
-	double slope_y(int x, int y);
-	double angle_slope_x(int x, int y);
-	double angle_slope_y(int x, int y);
+	double slopeX(int x, int y);
+	double slopeY(int x, int y);
+	double angleSlopeX(int x, int y);
+	double angleSlopeY(int x, int y);
 	int terrainLoadFromImage(char *filename, int normals);
 	int terrainLoadFromImage(char *filename, int normals, int ungebraucht);
-	bool load_image(char path[], int normals);
+	bool loadImage(char path[], int normals);
 	void error_output(void);
 	void randomize2(double r );
 	void showProgressbar(void);
@@ -75,10 +73,10 @@ public:
 	pair<double,double> findRange(vector<double> heightvec);
 	bool saveOBJ(char path[]);
 	bool save_image(char path[],string format);
-	wxImage Make_Preview_Image(void);
+	wxImage makePreviewImage(void);
 	wxImage Make_Sediment_Image(void);
-	void Scale_Terrain(double factor);
-	void reset_Flag(void);
+	void scaleTerrain(double factor);
+	void resetFlag(void);
 	void normalAtPoint(int x, int z, Vector3 &n);
 	//void Voronoi(int x_int, int y_int, float *da);
 	void Voronoi_Tex(int fValue, int blockSize,/* int _seed=0, */
@@ -111,15 +109,14 @@ public:
 	int iterat;
 	int rand2;
 
-	void Inp_subdivision(double coeff,double _inp_map[]);
-	void subdiv_inp_map(double coeff,int x1, int y1, int x2, int y2);
-	double *inp_map;
+	void subdivision(double coeff,double _inp_map[]);
+	double *m_inputMap;
 	void delete_hashs();
 	
 	
 
-	void Diff();
-	void ThermalErosion(int iter, double Talus);
+	void heightDiff();
+	void thermalErosion(int iter, double Talus);
 
 
 
