@@ -14,13 +14,13 @@
 
 wxGauge* get_gauge(void);
 
-class BasicFrame : public wxFrame {
+class SimGUI : public wxFrame {
 public:
-	BasicFrame(const wxChar *title,
+	SimGUI(const wxChar *title,
 		int xpos, int ypos,
 		int width, int height);
-	~BasicFrame();
-	void Onthebutton(wxCommandEvent &event);
+	~SimGUI();
+	void buttonClick(wxCommandEvent &event);
 	void subdivideButtonEvent(wxCommandEvent &event);
 	void openImageButtonEvent(wxCommandEvent &event);
 	void erosionButtonEvent(wxCommandEvent &event);
@@ -332,7 +332,6 @@ private:
 		COMBINED_GENERATE,
 		BUTTON_PERTURB,
 
-
 		BUTTON_EROSION,
 		BUTTON_THERMAL_EROSION,
 		TOGGLE_AUTO,
@@ -354,7 +353,6 @@ private:
 		SLIDER_SCALE_TERRAIN_REAL,
 		BUTTON_SCALE_TERRAIN_REAL,
 
-
 		BUTTON_WATER_SIMULATE,
 		SLIDER_RAIN_WATER_AMOUNT,
 		SLIDER_WATER_RADIUS,
@@ -372,6 +370,7 @@ private:
 		TOGGLE_WATER_PREVIEW
 
 	};
+
 	double foldingCoeff;
 	int erosionRadius;
 	int erosionIterations;

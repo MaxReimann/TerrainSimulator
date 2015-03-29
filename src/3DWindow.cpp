@@ -3,8 +3,8 @@
 #include "3dwindow.h"
 #include "..\resources\rotate_icon_png.cpp"
 #include "main.h"
-#include "Drawable.h"
-#include "Image.h"
+#include "drawable.h"
+#include "image.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,13 +22,13 @@ const int       HEIGHTMAP_GRID_SPACING = 16;
 #define terrainStepWidth 0.0625
 #define terrainStepLength 0.0625
 
-float BasicGLPane::zoom = -5.0;
+float GLPane::zoom = -5.0;
 
 
 using namespace std;
 
 
-void BasicGLPane::mouseMoved(wxMouseEvent& event) {
+void GLPane::mouseMoved(wxMouseEvent& event) {
 	if (event.m_middleDown == true) //wenn gleichzeitg die mittelmaustaste gedrueckt
 	{
 		if (event.m_shiftDown == true) //modifier shift zum translieren
@@ -54,7 +54,7 @@ void BasicGLPane::mouseMoved(wxMouseEvent& event) {
 	}
 
 }
-GLint BasicGLPane::project(int x, int y, int z){
+GLint GLPane::project(int x, int y, int z){
 	//results are written to win_co
 	GLdouble model_mat[16];
 	GLdouble project_mat[16];
@@ -71,7 +71,7 @@ GLint BasicGLPane::project(int x, int y, int z){
 	return result;
 }
 
-GLint  BasicGLPane::unproject(int winx, int winy, int winz){
+GLint  GLPane::unproject(int winx, int winy, int winz){
 	GLdouble model_mat[16];
 	GLdouble project_mat[16];
 	GLint viewp_mat[4];
@@ -98,19 +98,19 @@ GLint  BasicGLPane::unproject(int winx, int winy, int winz){
 	return result;
 }
 
-void BasicGLPane::mouseWheelMoved(wxMouseEvent& event) {
+void GLPane::mouseWheelMoved(wxMouseEvent& event) {
 	int fac = event.GetWheelRotation();
 	zoom += fac / 120.0;
 	Refresh();
 }
 
 
-void BasicGLPane::rightClick(wxMouseEvent& event) {}
-void BasicGLPane::mouseLeftWindow(wxMouseEvent& event) {}
-void BasicGLPane::keyPressed(wxKeyEvent& event) {}
-void BasicGLPane::keyReleased(wxKeyEvent& event) {}
+void GLPane::rightClick(wxMouseEvent& event) {}
+void GLPane::mouseLeftWindow(wxMouseEvent& event) {}
+void GLPane::keyPressed(wxKeyEvent& event) {}
+void GLPane::keyReleased(wxKeyEvent& event) {}
 
-void BasicGLPane::middleMouseDown(wxMouseEvent& event) {
+void GLPane::middleMouseDown(wxMouseEvent& event) {
 	m_lastX = event.GetX(); //lastX prevents model jumping at second click
 	m_lastY = event.GetY();
 	m_shiftLastX = event.GetX();
@@ -118,14 +118,14 @@ void BasicGLPane::middleMouseDown(wxMouseEvent& event) {
 	m_rotating = true;
 }
 
-void BasicGLPane::mouseReleased(wxMouseEvent& event) {
+void GLPane::mouseReleased(wxMouseEvent& event) {
 	if (event.m_middleDown == false)
 		m_rotating = false;
 }
 
 
 
-BasicGLPane::BasicGLPane(wxFrame* parent, int* args) :
+GLPane::GLPane(wxFrame* parent, int* args) :
 wxGLCanvas(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("GLCanvas"), args),
 m_alpha(0), 
 m_xPos(0), m_yPos(0), m_zPos(0), 
@@ -163,7 +163,7 @@ m_update(0)
 	m_rotating = true;
 }
 
-BasicGLPane::~BasicGLPane() {
+GLPane::~GLPane() {
 	m_errorStream.close();
 	delete[] win_cox, delete[]  win_coy, delete[]  win_coz;
 	delete[] obj_cox, delete[] obj_coy, delete[] obj_coz;
@@ -172,14 +172,14 @@ BasicGLPane::~BasicGLPane() {
 	cleanupShader();
 }
 
-void BasicGLPane::resized(wxSizeEvent& evt)
+void GLPane::resized(wxSizeEvent& evt)
 {
 	wxGLCanvas::OnSize(evt);
 	Refresh();
 }
 
 
-void  BasicGLPane::processMouse(int button, int state, int x, int y)
+void  GLPane::processMouse(int button, int state, int x, int y)
 {
 	// Used for wheels, has to be up
 	if (state == GLUT_UP)
@@ -193,7 +193,7 @@ void  BasicGLPane::processMouse(int button, int state, int x, int y)
 
 
 
-void BasicGLPane::prepare3DViewport(int topleftX, int topleftY, int bottomrigthX, int bottomrigth_y)
+void GLPane::prepare3DViewport(int topleftX, int topleftY, int bottomrigthX, int bottomrigth_y)
 {
 	/*
 	*  Inits the OpenGL viewport for drawing in 3D.
@@ -218,13 +218,13 @@ void BasicGLPane::prepare3DViewport(int topleftX, int topleftY, int bottomrigthX
 }
 
 
-void BasicGLPane::camera(void) {
+void GLPane::camera(void) {
 	glRotatef(m_xRot, 1.0, 0.0, 0.0);  //rotate our camera on the x-axis (left and right)
 	glRotatef(m_yRot, 0.0, -1.0, 0.0);  //rotate our camera on the y-axis (up and down)
 	glTranslated(-m_xPos, m_yPos, -m_zPos); //translate the screen to the position of our camera
 }
 
-void BasicGLPane::mouseMovement(int x, int y) {
+void GLPane::mouseMovement(int x, int y) {
 	int diffX = x - m_lastX; //check the difference between the current x and the last x position
 	int diffY = y - m_lastY; //check the difference between the current y and the last y position
 	m_lastX = x; //set lastx to the current x position
@@ -232,7 +232,7 @@ void BasicGLPane::mouseMovement(int x, int y) {
 	m_xRot += (float)diffY; //set the xrot to xrot with the addition of the difference in the y position
 	m_yRot += (float)diffX;    //set the xrot to yrot with the addition of the difference in the x position
 }
-void BasicGLPane::mouseshift(int x, int y) {
+void GLPane::mouseshift(int x, int y) {
 	float diffX = ((float)x - m_shiftLastX) / 50.0; //check the difference between the current x and the last x position
 	float diffY = -((float)y - m_shiftLastY) / 50.0; //check the difference between the current y and the last y position
 	m_shiftLastX = x; //set lastx to the current x position
@@ -240,7 +240,7 @@ void BasicGLPane::mouseshift(int x, int y) {
 	m_xShift += diffX;
 	m_yShift += diffY;
 }
-void BasicGLPane::setFlag(int x, int y) {
+void GLPane::setFlag(int x, int y) {
 	if (x >= 0 && x < Alti.getXSize())
 		Alti.FlagX = x;
 	if (y >= 0 && y < Alti.getYSize())
@@ -248,17 +248,17 @@ void BasicGLPane::setFlag(int x, int y) {
 	Refresh();
 }
 
-int BasicGLPane::getWidth()
+int GLPane::getWidth()
 {
 	return GetSize().x;
 }
 
-int BasicGLPane::getHeight()
+int GLPane::getHeight()
 {
 	return GetSize().y;
 }
 
-GLuint BasicGLPane::makeTerrain(){
+GLuint GLPane::makeTerrain(){
 
 	m_terrainDL = glGenLists(1); // generate list on GPU
 
@@ -297,18 +297,18 @@ GLuint BasicGLPane::makeTerrain(){
 	return(m_terrainDL);
 }
 
-void BasicGLPane::refreshTerrain() {
+void GLPane::refreshTerrain() {
 	m_update = true;
 
 }
-void BasicGLPane::defineFlag() {
+void GLPane::defineFlag() {
 	glColor4f(0.8, 0.7, 1, 1);
 	glTranslatef(Alti.FlagX * 0.025, (Alti.FlagY)  * 0.025, Alti.getAltitude(Alti.FlagX, (Alti.FlagY))  * m_terrainHeightScale);
 	m_cylinder = gluNewQuadric();
 	gluCylinder(m_cylinder, 0.05, 0.05, 0.5, 20, 20);
 }
 
-void BasicGLPane::zoomFunc(){
+void GLPane::zoomFunc(){
 	GLint viewport[4];
 	glGetIntegerv(GL_VIEWPORT, viewport);
 
@@ -323,7 +323,7 @@ void BasicGLPane::zoomFunc(){
 }
 
 
-void BasicGLPane::render(wxPaintEvent& evt)
+void GLPane::render(wxPaintEvent& evt)
 {
 	if (!IsShown()) return;
 
@@ -405,14 +405,14 @@ void BasicGLPane::render(wxPaintEvent& evt)
 	m_runs += 1;
 }
 
-void BasicGLPane::createOkDialog(string msg, string title)
+void GLPane::createOkDialog(string msg, string title)
 {
 	okDialog = new wxMessageDialog(NULL, wxString(msg), wxString(title), wxOK | wxICON_HAND, wxDefaultPosition);
 	okDialog->ShowModal();
 	okDialog->Destroy();
 }
 
-void BasicGLPane::initTextures(void) {
+void GLPane::initTextures(void) {
 	GLenum err = glewInit();
 
 	if (GLEW_OK != err){
@@ -435,7 +435,7 @@ void BasicGLPane::initTextures(void) {
 	}
 }
 
-void BasicGLPane::updateTerrain(void) {
+void GLPane::updateTerrain(void) {
 	terrainCreate();
 	if (!generateVertices())
 	{
@@ -446,7 +446,7 @@ void BasicGLPane::updateTerrain(void) {
 
 }
 
-void BasicGLPane::startWaterSimulation(int method, WaterConstants *constants)
+void GLPane::startWaterSimulation(int method, WaterConstants *constants)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	WaterSimulation watersim = WaterSimulation(constants, method);
@@ -456,7 +456,7 @@ void BasicGLPane::startWaterSimulation(int method, WaterConstants *constants)
 
 
 
-GLuint BasicGLPane::linkShaders(GLuint vertShader, GLuint fragShader)
+GLuint GLPane::linkShaders(GLuint vertShader, GLuint fragShader)
 {
     // Links the compiled vertex and/or fragment shaders into an executable
     // shader program. Returns the executable shader object. If the shaders
@@ -505,7 +505,7 @@ GLuint BasicGLPane::linkShaders(GLuint vertShader, GLuint fragShader)
     return program;
 }
 
-GLuint BasicGLPane::loadShaderProgram(const char *pszFilename, std::string &infoLog)
+GLuint GLPane::loadShaderProgram(const char *pszFilename, std::string &infoLog)
 {
     infoLog.clear();
 
@@ -561,12 +561,12 @@ GLuint BasicGLPane::loadShaderProgram(const char *pszFilename, std::string &info
     return program;
 }
 
-GLuint BasicGLPane::loadTexture(const char *pszFilename)
+GLuint GLPane::loadTexture(const char *pszFilename)
 {
     return loadTexture(pszFilename, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR, GL_REPEAT, GL_REPEAT);
 }
 
-GLuint BasicGLPane::loadTexture(const char *pszFilename, GLint magFilter, GLint minFilter,
+GLuint GLPane::loadTexture(const char *pszFilename, GLint magFilter, GLint minFilter,
                    GLint wrapS, GLint wrapT)
 {
     GLuint id = 0;
@@ -600,14 +600,14 @@ GLuint BasicGLPane::loadTexture(const char *pszFilename, GLint magFilter, GLint 
     return id;
 }
 
-void BasicGLPane::bindTexture(GLuint texture, GLuint unit)
+void GLPane::bindTexture(GLuint texture, GLuint unit)
 {
     glActiveTexture(GL_TEXTURE0 + unit);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-GLuint BasicGLPane::compileShader(GLenum type, char *pszSource, GLint length)
+GLuint GLPane::compileShader(GLenum type, char *pszSource, GLint length)
 {
     // Compiles the shader given it's source code. Returns the shader object.
     // A std::string object containing the shader's info log is thrown if the
@@ -643,7 +643,7 @@ GLuint BasicGLPane::compileShader(GLenum type, char *pszSource, GLint length)
     return shader;
 }
 
-GLuint BasicGLPane::createNullTexture(int width, int height)
+GLuint GLPane::createNullTexture(int width, int height)
 {
     // Create an empty white texture. This texture is applied to models
     // that don't have any texture maps. This trick allows the same shader to
@@ -671,7 +671,7 @@ GLuint BasicGLPane::createNullTexture(int width, int height)
 
 
 
-void BasicGLPane::createTextures() {
+void GLPane::createTextures() {
 	if (!(g_nullTexture = createNullTexture(2, 2)))
         throw std::runtime_error("failed to create null texture.");
 
@@ -690,7 +690,7 @@ void BasicGLPane::createTextures() {
 
 }
 
-void BasicGLPane::readTextFile(const char *pszFilename, std::string &buffer)
+void GLPane::readTextFile(const char *pszFilename, std::string &buffer)
 {
     std::ifstream file(pszFilename, std::ios::binary);
 
@@ -706,7 +706,7 @@ void BasicGLPane::readTextFile(const char *pszFilename, std::string &buffer)
     }
 }
 
-void BasicGLPane::initStruct(void) {
+void GLPane::initStruct(void) {
 
 
 	g_regions[0].min = -10.0f;//alle werte 10 runter, da bei 0.0 nur schwarz (nichts) angezigt wird
@@ -733,7 +733,7 @@ void BasicGLPane::initStruct(void) {
 }
 
 
-void BasicGLPane::updateTerrainShaderParameters()
+void GLPane::updateTerrainShaderParameters()
 {
     GLint handle = -1;
 
@@ -784,7 +784,7 @@ void BasicGLPane::updateTerrainShaderParameters()
 
 
 
-bool BasicGLPane::generateVertices()
+bool GLPane::generateVertices()
 {
     //*pVertices = 0;
     Vertex *pVertex = 0;
@@ -830,7 +830,7 @@ bool BasicGLPane::generateVertices()
     return true;
 }
 
-bool BasicGLPane::terrainCreate(void)
+bool GLPane::terrainCreate(void)
 {
     // Initialize the vertex buffer object.
 
@@ -854,7 +854,7 @@ bool BasicGLPane::terrainCreate(void)
     return generateIndices();
 }
 
-bool BasicGLPane::generateIndices()
+bool GLPane::generateIndices()
 {
     void *pBuffer = 0;
 	int size = Alti.getXSize();
@@ -934,7 +934,7 @@ bool BasicGLPane::generateIndices()
 }
 
 
-void BasicGLPane::terrainDraw()
+void GLPane::terrainDraw()
 {
 
 
@@ -964,7 +964,7 @@ void BasicGLPane::terrainDraw()
 }
 
 
-void BasicGLPane::cleanupShader()
+void GLPane::cleanupShader()
 {
 	cleanupStructs();
 
@@ -993,7 +993,7 @@ void BasicGLPane::cleanupShader()
 }
 
 
-void BasicGLPane::cleanupStructs(){
+void GLPane::cleanupStructs(){
 	if (m_vertexBuffer)
     {
         glDeleteBuffers(1, &m_vertexBuffer);

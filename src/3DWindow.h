@@ -29,12 +29,12 @@ struct TerrainRegion
 
 
 
-class BasicGLPane : public wxGLCanvas
+class GLPane : public wxGLCanvas
 {
    
 public:
-	BasicGLPane(wxFrame* parent, int* args);
-	~BasicGLPane();
+	GLPane(wxFrame* parent, int* args);
+	~GLPane();
 	void resized(wxSizeEvent& evt);
     static float zoom;
 	int getWidth();

@@ -6,11 +6,11 @@
 
 
 
-extern BasicGLPane *glPlane; 
+extern GLPane *glPlane; 
 extern AltitudeMap Alti;
 
 extern wxBitmap global_preview_bitmap; //sollte global bekant sein
 extern wxBitmap g_sedimentBitmap;
 
-extern BasicFrame *frame;
+extern SimGUI *frame;
 #endif
