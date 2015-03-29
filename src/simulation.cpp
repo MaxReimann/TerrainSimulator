@@ -1,6 +1,9 @@
+#include "stdafx.h"
 #include "simulation.h"
 #include "util/tga.h"
 #include "voronoi.h"
+#include <wx/image.h>
+#include "util/random.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -5,7 +5,10 @@
 	#define _CRTDBG_MAP_ALLOC
 #endif
 
-#include "imports.h"
+#include "stdafx.h"
+#include "wx\accel.h"
+
+
 class BitmapPanel : public wxPanel
 {
  

@@ -117,7 +117,8 @@ src/drawable.h
 src/globals.h
 src/image.cpp
 src/image.h
-src/imports.h
+src/stdafx.h
+src/stdafx.cpp
 src/loadobj.cpp
 src/main.h
 src/main.cpp
@@ -145,6 +146,7 @@ src/util/random.h
 src/util/random.cpp
 )
 
+set_source_files_properties(src/stdafx.cpp /Yc"stdafx.h")
 
 source_group_by_path("${CMAKE_CURRENT_SOURCE_DIR}/source"
 	"\\\\.h$|\\\\.hpp$|\\\\.cpp$|\\\\.c$|\\\\.ui$|\\\\.qrc$" "Source Files" ${sources})
@@ -158,6 +160,11 @@ set(target ${META_PROJECT_NAME})
 
 add_executable(${target} ${sources})
 
+
+if (MSVC)
+   set_target_properties(${target} PROPERTIES COMPILE_FLAGS "/Yustdafx.h")
+   set_source_files_properties(src/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+endif(MSVC)
 
 include_directories(
 	${OPENGL_INCLUDE_DIR}

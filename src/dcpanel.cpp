@@ -1,6 +1,8 @@
+#include "stdafx.h"
 #include "dcpanel.h"
 #include "..\resources\crosshair_png.cpp" //png bild in c vector
 #include "globals.h"
+#include "wx\event.h"
 
 
 BEGIN_EVENT_TABLE(BitmapPanel, wxPanel)

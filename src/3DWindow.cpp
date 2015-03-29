@@ -1,8 +1,10 @@
-#include "imports.h"
+#include "stdafx.h"
 #include "globals.h"
 #include "3dwindow.h"
 #include "..\resources\rotate_icon_png.cpp"
 #include "main.h"
+#include "Drawable.h"
+#include "Image.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

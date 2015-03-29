@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #define ALT(x,y) (map[(x)*ysize+(y)])
 /* needed for voronoi */
 #define HASHPNT(x,y) hashpntf+2*hash[ (hash[(y) & 255]+(x)) & 255]

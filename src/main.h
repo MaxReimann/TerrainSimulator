@@ -1,120 +1,117 @@
 #ifndef MAIN_H
 #define MAIN_H
 #ifdef _DEBUG
-	#define _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
 #endif
 
-#include "imports.h"
+#include "stdafx.h"
 #include "simulation.h"
 #include "dcpanel.h"
 
 
 
 
+
 wxGauge* get_gauge(void);
 
-
-
-
-
 class BasicFrame : public wxFrame {
-   public:
-   BasicFrame( const wxChar *title,
-               int xpos, int ypos,
-               int width, int height);
-   ~BasicFrame();
-   void Onthebutton(wxCommandEvent &event);
-   void subdivideButtonEvent(wxCommandEvent &event);
-   void openImageButtonEvent(wxCommandEvent &event);
-   void erosionButtonEvent(wxCommandEvent &event);
-   void thermalErosionButtonEvent(wxCommandEvent &event);
-   void randomizeButtonEvent(wxCommandEvent &event);
-   void plateauButtonEvent(wxCommandEvent &event);
-   void positionFlagButtonEvent(wxCommandEvent &event);
-   void openObjButtonEvent(wxCommandEvent &event);
-   void saveObjEvent(wxCommandEvent &event);
-   void saveImageEvent(wxCommandEvent &event);
-   void openClosePicEvent(wxCommandEvent &event);
-   void scaleTerrainRealButtonEvent(wxCommandEvent &event);
-   void simulateWaterEvent(wxCommandEvent &event);
-   void perlinNoiseEvent(wxCommandEvent &event);
-   void buttonVoronoiEvent(wxCommandEvent &event);
-   void combinedGenerateEvent(wxCommandEvent &event);
-   void buttonSavePresetEvent(wxCommandEvent &event);
-   void buttonLoadPresetEvent(wxCommandEvent &event);
-   void perturbationButtonEvent(wxCommandEvent &event);
+public:
+	BasicFrame(const wxChar *title,
+		int xpos, int ypos,
+		int width, int height);
+	~BasicFrame();
+	void Onthebutton(wxCommandEvent &event);
+	void subdivideButtonEvent(wxCommandEvent &event);
+	void openImageButtonEvent(wxCommandEvent &event);
+	void erosionButtonEvent(wxCommandEvent &event);
+	void thermalErosionButtonEvent(wxCommandEvent &event);
+	void randomizeButtonEvent(wxCommandEvent &event);
+	void plateauButtonEvent(wxCommandEvent &event);
+	void positionFlagButtonEvent(wxCommandEvent &event);
+	void openObjButtonEvent(wxCommandEvent &event);
+	void saveObjEvent(wxCommandEvent &event);
+	void saveImageEvent(wxCommandEvent &event);
+	void openClosePicEvent(wxCommandEvent &event);
+	void scaleTerrainRealButtonEvent(wxCommandEvent &event);
+	void simulateWaterEvent(wxCommandEvent &event);
+	void perlinNoiseEvent(wxCommandEvent &event);
+	void buttonVoronoiEvent(wxCommandEvent &event);
+	void combinedGenerateEvent(wxCommandEvent &event);
+	void buttonSavePresetEvent(wxCommandEvent &event);
+	void buttonLoadPresetEvent(wxCommandEvent &event);
+	void perturbationButtonEvent(wxCommandEvent &event);
 
-   void spinctrl1Event(wxSpinEvent &event);
-   void spinctrl2Event(wxSpinEvent &event);
-   void spinctrl3Event(wxSpinEvent &event);
-   void choiceCombined1Event(wxCommandEvent &event);
-   void choiceCombined2Event(wxCommandEvent &event);
-   void choiceCombined3Event(wxCommandEvent &event);
+	void spinctrl1Event(wxSpinEvent &event);
+	void spinctrl2Event(wxSpinEvent &event);
+	void spinctrl3Event(wxSpinEvent &event);
+	void choiceCombined1Event(wxCommandEvent &event);
+	void choiceCombined2Event(wxCommandEvent &event);
+	void choiceCombined3Event(wxCommandEvent &event);
 
-   void sliderErosionIterationenEvent(wxCommandEvent &event);
-   void sliderSubdivisionEvent(wxCommandEvent &event);
-   void sliderErosionRadiusEvent(wxCommandEvent &event);
-   void randomizeSliderEvent(wxCommandEvent &event);
-   void sliderScaleTerrainEvent(wxCommandEvent &event);
-   void sliderPlateauRadiusEvent(wxCommandEvent &event);
-   void sliderOctavesEvent(wxSpinEvent &event);
-   void sliderPerlinZoomEvent(wxCommandEvent &event);
-   void sliderPersistenceEvent(wxCommandEvent &event);
+	void sliderErosionIterationenEvent(wxCommandEvent &event);
+	void sliderSubdivisionEvent(wxCommandEvent &event);
+	void sliderErosionRadiusEvent(wxCommandEvent &event);
+	void randomizeSliderEvent(wxCommandEvent &event);
+	void sliderScaleTerrainEvent(wxCommandEvent &event);
+	void sliderPlateauRadiusEvent(wxCommandEvent &event);
+	void sliderOctavesEvent(wxSpinEvent &event);
+	void sliderPerlinZoomEvent(wxCommandEvent &event);
+	void sliderPersistenceEvent(wxCommandEvent &event);
 
-   void toggleWatersourceEvent(wxCommandEvent &event);
-   void toggleRainEvent(wxCommandEvent &event);
-   void toggleSedimentPreviewEvent(wxCommandEvent &event);
-   void toggleWaterPreviewEvent(wxCommandEvent &event);
-   void toggleAutoEvent(wxCommandEvent &event);
+	void toggleWatersourceEvent(wxCommandEvent &event);
+	void toggleRainEvent(wxCommandEvent &event);
+	void toggleSedimentPreviewEvent(wxCommandEvent &event);
+	void toggleWaterPreviewEvent(wxCommandEvent &event);
+	void toggleAutoEvent(wxCommandEvent &event);
 
-   void sliderRainAmountEvent(wxCommandEvent &event);
-   void sliderWaterRadiusEvent(wxCommandEvent &event);
-   void sliderWaterAmountEvent(wxCommandEvent &event);
-   void sliderSedimentCapacityEvent(wxCommandEvent &event);
-   void sliderDepositionConstantEvent(wxCommandEvent &event);
-   void sliderDissolvingConstantEvent(wxCommandEvent &event);
-   void sliderEvaporationConstantEvent(wxCommandEvent &event);
-   void sliderTimestepEvent(wxCommandEvent &event);
-   void sliderMinimumAlphaEvent(wxCommandEvent &event);
-   void sliderIterationsEvent(wxCommandEvent &event);
-	
-   void voronoi(double inp_map[] = NULL);
-   bool executeChoice(int choice,double inp_map[]);
-   void errorDialog(string text);
-   void savePresetText(string path);
-   string getValues(int choice);
-   void loadPresetText(string path);
-  
-   template <class T>
-   string numToString(T input);
+	void sliderRainAmountEvent(wxCommandEvent &event);
+	void sliderWaterRadiusEvent(wxCommandEvent &event);
+	void sliderWaterAmountEvent(wxCommandEvent &event);
+	void sliderSedimentCapacityEvent(wxCommandEvent &event);
+	void sliderDepositionConstantEvent(wxCommandEvent &event);
+	void sliderDissolvingConstantEvent(wxCommandEvent &event);
+	void sliderEvaporationConstantEvent(wxCommandEvent &event);
+	void sliderTimestepEvent(wxCommandEvent &event);
+	void sliderMinimumAlphaEvent(wxCommandEvent &event);
+	void sliderIterationsEvent(wxCommandEvent &event);
 
-   template <class T>
-   T stringToNum(string input,T wished_type);
+	void voronoi(double inp_map[] = NULL);
+	bool executeChoice(int choice, double inp_map[]);
+	void errorDialog(string text);
+	void savePresetText(string path);
+	string getValues(int choice);
+	void loadPresetText(string path);
 
-   string readline(ifstream& file,char buffer[]);
-   void changeWxChoice(int choice,int num);
-   double getTalusThreshold();
+	template <class T>
+	string numToString(T input);
 
-   void paintEvent(wxPaintEvent & event);
-   void render(wxDC&  dc);
-   void updateImage(void);
-   void manualRender();
-   void handleSashPosition(wxSplitterEvent &event);
-   void drawPoint(wxMouseEvent &event);
-   void toggleCrosshair(wxCommandEvent &event);
-   void updateChain(void);
-   void m_splitter3OnIdle(wxIdleEvent&);
-   
+	template <class T>
+	T stringToNum(string input, T wished_type);
 
-   wxSplitterWindow* m_splitter3;
-   wxPanel* m_panel12;
-   wxImageList *imagelist;
+	string readline(ifstream& file, char buffer[]);
+	void changeWxChoice(int choice, int num);
+	double getTalusThreshold();
 
-   wxPanel *panel;
-   wxButton *button;
-   wxButton *Loadfromimage_but;
-   wxButton *but_subdivide;
-   wxSlider *subdivide_coeff_slider;
+	void paintEvent(wxPaintEvent & event);
+	void render(wxDC&  dc);
+	void updateImage(void);
+	void manualRender();
+	void handleSashPosition(wxSplitterEvent &event);
+	void drawPoint(wxMouseEvent &event);
+	void toggleCrosshair(wxCommandEvent &event);
+	void updateChain(void);
+	void m_splitter3OnIdle(wxIdleEvent&);
+
+
+	wxSplitterWindow* m_splitter3;
+	wxPanel* m_panel12;
+	wxImageList *imagelist;
+
+	wxPanel *panel;
+	wxButton *button;
+	wxButton *Loadfromimage_but;
+	wxButton *but_subdivide;
+	wxSlider *subdivide_coeff_slider;
 
 
 	wxNotebook *m_notebook2;
@@ -125,7 +122,7 @@ class BasicFrame : public wxFrame {
 	wxStaticText* m_staticText3;
 	wxSlider* subdiv_slider_coeff;
 	wxSlider* slider_fine_subdivision;
-	
+
 	//--voronoi--
 	wxPanel* m_voronoi;
 	wxButton* m_button_voro_gen;
@@ -142,7 +139,7 @@ class BasicFrame : public wxFrame {
 	wxStaticLine* m_staticline5;
 	wxStaticText* m_staticText_fValue;
 	wxSlider* m_slider_fValue;
-	
+
 	//-----Combined Panel--//
 	wxPanel* Combined_panel;
 	wxChoice* m_choice21;
@@ -220,10 +217,6 @@ class BasicFrame : public wxFrame {
 	wxStaticText* m_staticText7;
 	wxSlider* scale_image_terrain;
 
-
-
-
-
 	wxPanel* scale;
 	wxButton* m_scale_terrain_but;
 	wxStaticText* m_staticText_scale;
@@ -239,7 +232,7 @@ class BasicFrame : public wxFrame {
 	wxStaticLine* m_staticline3;
 	wxStaticText* m_staticText17;
 	wxToggleButton* m_togglerain;
-		
+
 	wxSlider* m_slider12;
 	wxStaticLine* m_staticline21;
 	wxStaticText* m_staticText18;
@@ -261,16 +254,16 @@ class BasicFrame : public wxFrame {
 	wxSlider* m_slider11;
 	wxPanel* m_panel13;
 	wxStaticText* m_staticText28;
-		
+
 	wxStaticText* m_staticText27;
 	wxStaticText* m_staticText26;
 	wxSlider* m_slider20;
-		
+
 	wxStaticText* m_staticText261;
 	wxSlider* m_slider18;
-		
+
 	wxStaticText* m_staticText32;
-		
+
 	wxStaticText* m_staticText33;
 	wxStaticText* m_staticText30;
 	wxSlider* m_slider22;
@@ -283,7 +276,7 @@ class BasicFrame : public wxFrame {
 	//wxPanel* load_obj_panel;
 	wxButton* load_obj;
 
-	BitmapPanel* panel_preview_picture;
+	BitmapPanel* panelPreviewPicture;
 	wxBitmapButton* open_close_pic_but;
 	wxStaticBitmap* m_bitmap2;
 	wxBitmap* crosshair_bmp;
@@ -295,25 +288,22 @@ class BasicFrame : public wxFrame {
 	wxMask  *pfeil_mask;
 	wxMask *Open_mask;
 
-	
-	
-	
-   wxString clip_variable; 
-   wxString voronoi_coeff_validator; 
-   wxString combination_listbox1; 
-   wxString combination_listbox2; 
-   wxString combination_listbox3; 
-   wxString threshold_var; 
+	wxString clip_variable;
+	wxString voronoi_coeff_validator;
+	wxString combination_listbox1;
+	wxString combination_listbox2;
+	wxString combination_listbox3;
+	wxString threshold_var;
 
-   std::fstream errorstream;
-   std::ofstream save_preset_stream;
-   std::ifstream read_preset_stream;
-   bool sediment_preview_on;
-   bool water_preview_on;
+	std::fstream errorstream;
+	std::ofstream save_preset_stream;
+	std::ifstream read_preset_stream;
+	bool sediment_preview_on;
+	bool water_preview_on;
 
-   
-DECLARE_EVENT_TABLE()
-private :
+
+	DECLARE_EVENT_TABLE()
+private:
 	enum {
 		BUTTON_SUBDIVIDE,
 		BUTTON_OPEN_IMAGE,
@@ -341,7 +331,7 @@ private :
 		CHOICEBOX3,
 		COMBINED_GENERATE,
 		BUTTON_PERTURB,
-		
+
 
 		BUTTON_EROSION,
 		BUTTON_THERMAL_EROSION,
@@ -363,9 +353,9 @@ private :
 		BUTTON_TOGGLE_CROSSHAIR,
 		SLIDER_SCALE_TERRAIN_REAL,
 		BUTTON_SCALE_TERRAIN_REAL,
-		
-		
-		BUTTON_WATER_SIMULATE,		
+
+
+		BUTTON_WATER_SIMULATE,
 		SLIDER_RAIN_WATER_AMOUNT,
 		SLIDER_WATER_RADIUS,
 		SLIDER_WATER_AMOUNT,
@@ -382,7 +372,7 @@ private :
 		TOGGLE_WATER_PREVIEW
 
 	};
-	double foldingCoeff; 
+	double foldingCoeff;
 	int erosionRadius;
 	int erosionIterations;
 	double randomizeRadius;
@@ -403,19 +393,19 @@ private :
 
 	double *copyMap1;
 	double *copyMap2;
-	double *copyMap3; 
+	double *copyMap3;
 };
 
 
 class BaseApp : public wxApp {
-   public:
+public:
 	//BasicFrame *frame;
-   virtual bool OnInit();
-   ~BaseApp();
-   wxBoxSizer* sizer;
-   
+	virtual bool OnInit();
+	~BaseApp();
+	wxBoxSizer* sizer;
+
 };
 
 
 #endif
-  
+

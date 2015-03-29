@@ -1,6 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
-#include "imports.h"
+#include "stdafx.h"
 #include "main.h"
 #include "3dwindow.h"
 

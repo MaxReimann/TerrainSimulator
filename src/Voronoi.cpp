@@ -1,6 +1,8 @@
+#include "stdafx.h"
 #include "globals.h"
 #include "voronoi.h"
 #include <algorithm>
+#include "util/random.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

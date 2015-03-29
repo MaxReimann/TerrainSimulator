@@ -6,31 +6,17 @@
 #include <string>
 #include <sstream> 
 #include <stdlib.h>
-#include <math.h>
-#include <windows.h>
-#include <cstddef>
-#include <time.h>
-
 
 #include <list>
 #include <utility>
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include "util/mathlib.h"
-#include "util/random.h"
-
-
 
 #include <GL/glew.h> //gl und glu werden mimt glew import
 #include <GL/glu.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
-
-
-#include "drawable.h"
-#include "image.h"
-
 
 #include "wx/wx.h"
 #include "wx/sizer.h"
@@ -59,7 +45,6 @@
 #include <wx/splitter.h>
 #include <wx/mstream.h>
 #include "wx/progdlg.h"
-
 
 
 #ifdef _DEBUG

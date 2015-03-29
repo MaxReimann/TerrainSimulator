@@ -49,7 +49,7 @@ any damages that you may incur for its usage.
 
 Antonio Ramires Fernandes ajbrf@yahoo.com
 -------------------------------------------------------------*/
-
+#include "stdafx.h"
 #include <windows.h>
 #include <gl/gl.h>
 #include <stdio.h>

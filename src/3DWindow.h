@@ -3,9 +3,11 @@
 	#define _CRTDBG_MAP_ALLOC
 #endif
 
-#include "imports.h"
+#include "stdafx.h"
 #include "dcpanel.h"
 #include "watersimulation.h"
+#include "Image.h"
+#include "Drawable.h"
 
 wxGauge* get_gauge(void);
 

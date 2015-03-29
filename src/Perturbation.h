@@ -1,7 +1,8 @@
 #ifndef  _PERTURBATION_H
 #define _PERTURBATION_H
 
-#include "imports.h"
+#include "stdafx.h"
+#include "wx/progdlg.h"
 
 #ifdef _DEBUG
 	#define _CRTDBG_MAP_ALLOC

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "perturbation.h"
 #include "globals.h"
 #ifdef _DEBUG

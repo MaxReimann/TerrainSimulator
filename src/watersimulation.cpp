@@ -1,8 +1,8 @@
+#include "stdafx.h"
 #include "watersimulation.h"
-
-#include <valarray>
 #include "globals.h"
 
+#include <valarray>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -507,7 +507,7 @@ void WaterSimulation::strictSolver()
 				VEX(x, y).w *= (1 - KE); //evaporation
 
 				m_max = KC * VEX(x, y).w; //maximum sediment amount (=capacity)
-				delta_m = max(0, VEX(x, y).sediment_amount - m_max); // amount exceeding maximum amount is deposited
+				delta_m = max(0.0, VEX(x, y).sediment_amount - m_max); // amount exceeding maximum amount is deposited
 				VEX(x, y).sediment_amount -= delta_m;
 				VEX(x, y).z += delta_m;
 			}
